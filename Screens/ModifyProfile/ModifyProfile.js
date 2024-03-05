@@ -1,16 +1,17 @@
-import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, ActivityIndicator, StyleSheet, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, ActivityIndicator, StyleSheet, ImageBackground, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import * as ImagePicker from "expo-image-picker"
 import styles from '../Login/style'
 import { FIREBASE_AUTH, database, db, storage } from '../../firebase';
-import { query, where, getDocs, updateDoc, doc, collection } from '@firebase/firestore'
+import { query, where, getDocs, updateDoc, doc, collection, deleteDoc } from '@firebase/firestore'
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { get, ref as ref2, set } from "firebase/database";
 import { useEffect } from 'react';
 import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import { getAuth, deleteUser } from "firebase/auth";
 
 const ModifyProfile = ({ navigation }) => {
     const [selectedImage, setSelectedImage] = useState("https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg");
@@ -19,6 +20,9 @@ const ModifyProfile = ({ navigation }) => {
     const [adresse, setAdresse] = useState('');
     const userId=FIREBASE_AUTH.currentUser.uid;
     const [loading, setLoading] = useState(false);
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const useNavigation=navigation
     useEffect(() => {
         const fetchProfilePicture = async () => {
             try {
@@ -112,8 +116,39 @@ const ModifyProfile = ({ navigation }) => {
         }
     };
     
+    const onDelete = () => {
+        Alert.alert(
+            "Confirmation",
+            "Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.",
+            [
+                {
+                    text: "Annuler",
+                    onPress: () => console.log("Annulation de la suppression"),
+                    style: "cancel"
+                },
+                { 
+                    text: "Supprimer", 
+                    onPress: async () => {
+                        try {
+                            // Delete user's document from Firestore
+                            const userDocRef = doc(db, 'users', userId);
+                            await deleteDoc(userDocRef);
     
-
+                            // Delete user account from Firebase Authentication
+                            await deleteUser(user);
+                            console.log("User account deleted successfully.");
+                            navigation.navigate('Welcome')
+                        } catch (error) {
+                            console.error("Error deleting user account:", error);
+                        }
+                    },
+                    style: "destructive"
+                }
+            ],
+            { cancelable: false }
+        );
+    };
+    
 
     return (
         <ImageBackground source={require('../../assets/image2.jpg')} style={style.background}>
@@ -243,6 +278,13 @@ const ModifyProfile = ({ navigation }) => {
                                 buttonStyle={[styles.loginButton, { width: 300 }]}
                                 onPress={() => onSaveChanges()}
                                 title="Effectuer les changements"
+                            />
+                        </View>
+                        <View style={{ flexDirection: "column", marginBottom: 1 }}>
+                            <Button
+                                buttonStyle={[styles.loginButton, { width: 300 }]}
+                                onPress={() => onDelete()}
+                                title="Supprimer le compte"
                             />
                         </View>
                     </View>
