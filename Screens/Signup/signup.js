@@ -5,7 +5,7 @@ import { Keyboard, KeyboardAvoidingView, Text, TextInput, TouchableWithoutFeedba
 import { Button } from "react-native-elements";
 import { FIREBASE_AUTH, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
 import { useNavigation } from "@react-navigation/native";
 import { sendEmailVerification } from "firebase/auth";
 
@@ -64,7 +64,7 @@ const SignupScreen = () => {
   const saveDataToFirestore = async (userId) => {
     try {
     
-      const docRef = await addDoc(collection(db, "users"), {
+      const docRef = await setDoc(doc(db, "users", userId), {
         UserId: userId,
         Email: email,
         Nom: nom,
@@ -72,7 +72,7 @@ const SignupScreen = () => {
         Adresse: adresse,
         PhoneNumber: phoneNumber 
       });
-      console.log("Document written with ID: ", docRef.id);
+    
     } catch (e) {
       console.error("Error adding document: ", e);
       setError("Error saving data. Please try again later.");

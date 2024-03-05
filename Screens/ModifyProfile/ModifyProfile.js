@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import * as ImagePicker from "expo-image-picker"
 import styles from '../Login/style'
 import { FIREBASE_AUTH, database, db, storage } from '../../firebase';
-import { query, where, getDocs, updateDoc, doc, collection, deleteDoc } from '@firebase/firestore'
+import { query, where, getDocs, updateDoc, doc, collection, deleteDoc, getDoc } from '@firebase/firestore'
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { get, ref as ref2, set } from "firebase/database";
 import { useEffect } from 'react';
@@ -129,18 +129,24 @@ const ModifyProfile = ({ navigation }) => {
                 { 
                     text: "Supprimer", 
                     onPress: async () => {
-                        try {
-                            // Delete user's document from Firestore
-                            const userDocRef = doc(db, 'users', userId);
-                            await deleteDoc(userDocRef);
-    
-                            // Delete user account from Firebase Authentication
-                            await deleteUser(user);
-                            console.log("User account deleted successfully.");
-                            navigation.navigate('Welcome')
-                        } catch (error) {
-                            console.error("Error deleting user account:", error);
-                        }
+                        const userId = FIREBASE_AUTH.currentUser.uid; // Fetching userId here
+console.log(userId);
+
+if (!userId) {
+    console.error("User ID is undefined.");
+    return;
+}
+
+try {
+
+        const userDocRef = doc(db, 'users',userId);
+        await deleteDoc(userDocRef);
+        await deleteUser(user);
+        console.log("User account deleted successfully.");
+        navigation.navigate('Welcome');
+} catch (error) {
+    console.error("Error deleting user account:", error);
+}
                     },
                     style: "destructive"
                 }
