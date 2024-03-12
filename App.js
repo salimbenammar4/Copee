@@ -17,7 +17,6 @@ import NotreEquipe from './Screens/NotreEquipe/NotreEquipe';
 import Photovoltaïque from './Screens/Photovoltaique/Photovoltaique';
 import Chauffage from './Screens/Chauffage/Chauffage';
 import Domotique from './Screens/Domotique/Domotique';
-import Chat from './Screens/Chat/chat';
 import Test from './Screens/Test/test';
 import Dashboard from './Screens/AdminDashboard/dashboard';
 import ManageUsers from './Screens/AdminDashboard/ManageUsers';
@@ -25,7 +24,6 @@ import form from './Screens/AdminDashboard/form';
 import ManagePersonnel from './Screens/AdminDashboard/ManagePersonnel';
 import ManageClients from './Screens/AdminDashboard/ManageClients';
 import ForgotPasswordScreen from './Screens/forgotPassword/forgot';
-import ChatList from './Screens/chatlist/ChatList';
 import ChatScreen from './Screens/ChatScreen'
 import MessageScreen from './Screens/MessageScreen'
 const Stack = createStackNavigator();
@@ -82,16 +80,14 @@ const App = () => {
                             fontWeight: 'bold',
                         },
                     }}/>
-  <Stack.Screen name="Chat" component={Chat}/>
   <Stack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }}/>
   <Stack.Screen name="ManageUsers" component={ManageUsers} options={{ headerShown: false }}/>
   <Stack.Screen name="Form" component={form} options={{ headerShown: false }}/>
   <Stack.Screen name="Personnel" component={ManagePersonnel} options={{ headerShown: false }}/>
   <Stack.Screen name="Clients" component={ManageClients} options={{ headerShown: false }}/>
   <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>   
-  <Stack.Screen name="ChatList" component={ChatList}/>
   <Stack.Screen name="ChatScreen" component={ChatScreen}/>    
-  <Stack.Screen name="MessageScreen" component={MessageScreen}/>          
+  <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>          
 </Stack.Navigator>
     </NavigationContainer>
   );

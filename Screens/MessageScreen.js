@@ -25,7 +25,7 @@ import ReceiverMessage from "../components/ReceiverMessage";
 import SenderMessage from "../components/SenderMessage";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
-
+import 'tailwindcss/tailwind';
 
 const MessagesScreen = () => {
   const auth = getAuth();
@@ -63,7 +63,6 @@ const MessagesScreen = () => {
   
     setInput("");
   };
-
   return (
     <SafeAreaView className="flex-1">
 
@@ -81,7 +80,7 @@ const MessagesScreen = () => {
               message.userId === user.uid ? (
                 <SenderMessage key={message.id} message={message}  />
               ) : (
-                <ReceiverMessage key={message.id} message={message} selectedImage={userDetails.selectedImage} />
+                <ReceiverMessage key={message.id} message={message} selectedImage={userDetails.SelectedImage} />
               )
             }
           />

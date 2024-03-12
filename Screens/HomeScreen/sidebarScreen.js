@@ -99,7 +99,7 @@ const SidebarScreen = () => {
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => {
-          navigation.navigate('MessageScreen',{userDetails:{UserId:user.uid}});}}
+          navigation.navigate('MessageScreen',{userDetails:{UserId:user.uid,SelectedImage:"https://firebasestorage.googleapis.com/v0/b/copee-41efa.appspot.com/o/COPEE.png?alt=media&token=cd10db43-2673-402c-9a71-e28d9519a354"}});}}
       >
         <View style={styles.menuItemContent}>
           <Entypo name="chat" size={24} color="black" style={styles.icon}/>

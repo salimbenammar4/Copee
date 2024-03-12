@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-
+import 'tailwindcss/tailwind';
 const SenderMessage = ({ message }) => {
   return (
     <View

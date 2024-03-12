@@ -12,7 +12,7 @@ import {
   query,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-
+import 'tailwindcss/tailwind';
 
 const ChatRow = ({ userDetails }) => {
   const navigation = useNavigation();

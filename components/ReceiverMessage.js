@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-
+import 'tailwindcss/tailwind';
 const ReceiverMessage = ({ message, selectedImage }) => {
   return (
     <View

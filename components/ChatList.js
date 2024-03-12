@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import ChatRow from "./ChatRow";
 import { getAuth } from "firebase/auth";
-
+import 'tailwindcss/tailwind';
 const ChatList = () => {
   const [friends, setFriends] = useState([]);
   const auth = getAuth();
