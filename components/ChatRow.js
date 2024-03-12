@@ -80,7 +80,7 @@ const ChatRow = ({ userDetails }) => {
           <Text className="text-lg font-semibold">
             {userDetails?.Nom} {userDetails?.Prenom}
           </Text>
-          <Text>{lastMessage || "Say Hi!👋 "}</Text>
+          <Text>{lastMessage || " "}</Text>
         </View>
       </TouchableOpacity>
     </View>
