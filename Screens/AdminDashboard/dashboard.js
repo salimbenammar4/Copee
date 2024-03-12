@@ -57,7 +57,7 @@ const Dashboard = ({ navigation }) => {
   };
 
   const handleManageDiscussions = () => {
-    navigation.navigate('ManageDiscussions');
+    navigation.navigate('ChatScreen');
   };
 
   const handleLogout = async () => {

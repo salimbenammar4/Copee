@@ -25,6 +25,9 @@ import form from './Screens/AdminDashboard/form';
 import ManagePersonnel from './Screens/AdminDashboard/ManagePersonnel';
 import ManageClients from './Screens/AdminDashboard/ManageClients';
 import ForgotPasswordScreen from './Screens/forgotPassword/forgot';
+import ChatList from './Screens/chatlist/ChatList';
+import ChatScreen from './Screens/ChatScreen'
+import MessageScreen from './Screens/MessageScreen'
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -85,7 +88,10 @@ const App = () => {
   <Stack.Screen name="Form" component={form} options={{ headerShown: false }}/>
   <Stack.Screen name="Personnel" component={ManagePersonnel} options={{ headerShown: false }}/>
   <Stack.Screen name="Clients" component={ManageClients} options={{ headerShown: false }}/>
-  <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>                  
+  <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>   
+  <Stack.Screen name="ChatList" component={ChatList}/>
+  <Stack.Screen name="ChatScreen" component={ChatScreen}/>    
+  <Stack.Screen name="MessageScreen" component={MessageScreen}/>          
 </Stack.Navigator>
     </NavigationContainer>
   );

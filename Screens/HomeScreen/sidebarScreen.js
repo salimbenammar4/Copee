@@ -3,7 +3,10 @@ import { View, Text, TouchableOpacity} from 'react-native';
 import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons, } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
 const SidebarScreen = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
   const [showServicesSubMenu, setShowServicesSubMenu] = useState(false);
   const navigation=useNavigation()
   const handleMenuItemPress = (menuItem) => {
@@ -96,7 +99,7 @@ const SidebarScreen = () => {
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => {
-          navigation.navigate('Chat');}}
+          navigation.navigate('MessageScreen',{userDetails:{UserId:user.uid}});}}
       >
         <View style={styles.menuItemContent}>
           <Entypo name="chat" size={24} color="black" style={styles.icon}/>
