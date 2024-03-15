@@ -19,6 +19,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
+  StatusBar
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ReceiverMessage from "../components/ReceiverMessage";
@@ -64,6 +65,8 @@ const MessagesScreen = () => {
     setInput("");
   };
   return (
+    <>
+    <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
     <SafeAreaView className="flex-1">
 
       <KeyboardAvoidingView
@@ -100,6 +103,7 @@ const MessagesScreen = () => {
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
+    </>
   );
 };
 

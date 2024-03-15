@@ -129,7 +129,7 @@ const ModifyProfile = ({ navigation }) => {
                 { 
                     text: "Supprimer", 
                     onPress: async () => {
-                        const userId = FIREBASE_AUTH.currentUser.uid; // Fetching userId here
+                        const userId = FIREBASE_AUTH.currentUser.uid; 
 console.log(userId);
 
 if (!userId) {
