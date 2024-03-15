@@ -103,7 +103,18 @@ const ModifyProfile = ({ navigation }) => {
                 if (prenom !== '') updatedData['Prenom'] = prenom;
                 if (adresse !== '') updatedData['Adresse'] = adresse;
                 await updateDoc(docRef, updatedData);
-                alert("Changements appliquées avec succès")
+                Alert.alert(
+                    "Succées",
+                    "Modification effectuées avec succées",
+                    [
+                        {
+                            text: "Parfait!",
+                            onPress: () => navigation.navigate("Profile"),
+                            
+                        },
+                    ],
+                    { cancelable: false }
+                );
                 console.log('Document updated successfully');
             } else {
                 console.log('No matching document found');
