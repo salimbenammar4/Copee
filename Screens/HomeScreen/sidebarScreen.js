@@ -60,7 +60,7 @@ const SidebarScreen = () => {
       )}
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => handleMenuItemPress('Nos Installations')}
+        onPress={() => navigation.navigate('NosInstallations')}
       >
         <View style={styles.menuItemContent}>
           <MaterialIcons name="account-tree" size={24} color="black" style={styles.icon}/>

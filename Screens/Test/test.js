@@ -35,6 +35,7 @@ const Test = () => {
       Proprietaire:selectedOption2,
       TypeInstallation: selectedOption3,
       Contact:selectedOption4,
+      Status: 'En Attente...'
     });
     Alert.alert(
         "Succées",

@@ -26,6 +26,7 @@ import ManageClients from './Screens/AdminDashboard/ManageClients';
 import ForgotPasswordScreen from './Screens/forgotPassword/forgot';
 import ChatScreen from './Screens/ChatScreen'
 import MessageScreen from './Screens/MessageScreen'
+import NosInstallations from './Screens/NosInstallations/NosInstallations';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -87,7 +88,8 @@ const App = () => {
   <Stack.Screen name="Clients" component={ManageClients} options={{ headerShown: false }}/>
   <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>   
   <Stack.Screen name="ChatScreen" component={ChatScreen}/>    
-  <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>          
+  <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>  
+          
 </Stack.Navigator>
     </NavigationContainer>
   );
@@ -104,6 +106,7 @@ const HomeStack = () => {
       <Drawer.Screen name="Chauffage" component={Chauffage} options={{headerShown:false}}/>
       <Drawer.Screen name="Domotique" component={Domotique} options={{headerShown:false}}/>
       <Stack.Screen name="test" component={Test} options={{ headerShown: false }}/>
+      <Stack.Screen name='NosInstallations' component={NosInstallations} options={{ headerShown: false }}/>
     </Drawer.Navigator>
   );
 };
