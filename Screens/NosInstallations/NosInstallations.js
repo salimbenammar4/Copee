@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Platform } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
@@ -14,6 +14,7 @@ const NosInstallations = () => {
     return (
         <ImageBackground source={require('../../assets/backk.jpg')} style={style.background}>
             <>
+            <StatusBar barStyle="dark-content" />
                 <View style={style.header}>
                     <TouchableOpacity
                         style={style.menuButton}
