@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity} from 'react-native';
-import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons, } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, Image,Linking} from 'react-native';
+import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons,FontAwesome6 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
@@ -15,14 +15,28 @@ const SidebarScreen = () => {
   const handleServicesPress = () => {
     setShowServicesSubMenu(!showServicesSubMenu);
   };
+
+  const openLinkFacebook = () => {
+    Linking.openURL('https://www.facebook.com/comptoir.occitan.copee');
+};
+
+const openLinkX = () => {
+  Linking.openURL('https://twitter.com/Copee26029778');
+};
+
+const openLinkLinkedin = () => {
+  Linking.openURL('https://www.linkedin.com/company/82936039/admin/');
+};
   return (
     <View style={{ flex: 1, alignItems: 'left', marginTop: '20%' }}>
+      <Image source={{ uri: 'https://www.copee.eu/wp-content/uploads/2022/01/logo-white-02-3.png' }} style={styles.heroimg} resizeMode="contain"/>
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => {
           navigation.navigate('MainHomeScreen');}}
       >
         <View style={styles.menuItemContent}>
+          
         <Ionicons name="newspaper-outline" size={24} color="black" style={styles.icon} />
           <Text style={styles.menuText}>Actualités</Text>
         </View>
@@ -87,15 +101,7 @@ const SidebarScreen = () => {
           <Text style={styles.menuText}>Test d'Eligibilité</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => handleMenuItemPress('Contact')}
-      >
-        <View style={styles.menuItemContent}>
-          <MaterialIcons name="connect-without-contact" size={24} color="black" style={styles.icon}/>
-          <Text style={styles.menuText}>Contact</Text>
-        </View>
-      </TouchableOpacity>
+      
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => {
@@ -106,6 +112,28 @@ const SidebarScreen = () => {
           <Text style={styles.menuText}>Chattez Avec Nous</Text>
         </View>
       </TouchableOpacity>
+      <View style={styles.socialButtonContainer}>
+  <TouchableOpacity
+    style={[styles.socialButton, {marginRight: 20}]}
+    onPress={openLinkFacebook}
+  >
+    <Entypo name="facebook" size={32} color="#3b5998" />
+  </TouchableOpacity>
+
+  <TouchableOpacity
+    style={styles.socialButton}
+    onPress={openLinkX}
+  >
+    <FontAwesome6 name="x-twitter" size={32} color="black" />
+  </TouchableOpacity>
+
+  <TouchableOpacity
+    style={styles.socialButton}
+    onPress={openLinkLinkedin}
+  >
+    <AntDesign name="linkedin-square" size={32} color="#0a66c2" />
+  </TouchableOpacity>
+</View>
     </View>
   );
 };
@@ -133,12 +161,27 @@ const styles = {
     marginHorizontal:10
   },
   subMenuItem: {
-    paddingLeft: 30, // Adjust indentation for sub-menu items
+    paddingLeft: 30, 
     paddingVertical: 10,
   },
   subMenuText: {
     fontSize: 15,
-    color: 'black', // Adjust color for sub-menu items
+    color: 'black', 
+  },
+  heroimg: {
+    width: '100%',
+    height: 100, 
+    marginBottom: 20, 
+  },
+  socialButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 80,
+    paddingHorizontal: 70,
+  },
+  socialButton: {
+    marginTop: 10, 
+    marginRight: 20, 
   },
 };
 

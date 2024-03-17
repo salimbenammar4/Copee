@@ -4,7 +4,6 @@ import { Platform } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../Login/style';
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
