@@ -94,7 +94,7 @@ const openLinkLinkedin = () => {
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => {
-          navigation.navigate('test');}}
+          navigation.navigate('MyTests');}}
       >
         <View style={styles.menuItemContent}>
           <Fontisto name="test-tube" size={24} color="black" style={styles.icon}/>

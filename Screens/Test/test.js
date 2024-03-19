@@ -39,11 +39,11 @@ const Test = () => {
     });
     Alert.alert(
         "Succées",
-        "mrigel",
+        "Vous avez ajouté une demande de test d'éligibilité. Le Personnel va vous contacter aussi vite que possible.",
         [
             {
                 text: "Ok",
-                onPress: () => navigation.goBack(),
+                onPress: () => navigation.navigate("MyTests"),
                 
             },
         ],

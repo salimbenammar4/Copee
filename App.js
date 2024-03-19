@@ -27,6 +27,7 @@ import ForgotPasswordScreen from './Screens/forgotPassword/forgot';
 import ChatScreen from './Screens/ChatScreen'
 import MessageScreen from './Screens/MessageScreen'
 import NosInstallations from './Screens/NosInstallations/NosInstallations';
+import MyTests from './Screens/MyTests/MyTests';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -107,6 +108,7 @@ const HomeStack = () => {
       <Drawer.Screen name="Domotique" component={Domotique} options={{headerShown:false}}/>
       <Stack.Screen name="test" component={Test} options={{ headerShown: false }}/>
       <Stack.Screen name='NosInstallations' component={NosInstallations} options={{ headerShown: false }}/>
+      <Stack.Screen name='MyTests' component={MyTests} options={{headerShown: false}}/>
     </Drawer.Navigator>
   );
 };
