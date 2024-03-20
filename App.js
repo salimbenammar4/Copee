@@ -28,6 +28,7 @@ import ChatScreen from './Screens/ChatScreen'
 import MessageScreen from './Screens/MessageScreen'
 import NosInstallations from './Screens/NosInstallations/NosInstallations';
 import MyTests from './Screens/MyTests/MyTests';
+import PersonnelDashboard from './Screens/PersonnelDashboard/PersonnelDashboard';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -90,6 +91,7 @@ const App = () => {
   <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>   
   <Stack.Screen name="ChatScreen" component={ChatScreen}/>    
   <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>  
+  <Stack.Screen name="PersonnelDashboard" component={PersonnelDashboard} options={{ headerShown: false }}/> 
           
 </Stack.Navigator>
     </NavigationContainer>

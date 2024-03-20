@@ -52,9 +52,6 @@ const Dashboard = ({ navigation }) => {
     fetchAdminsCount(); 
   }, []);
 
-  const handleManageUsers = () => {
-    navigation.navigate('ManageUsers');
-  };
 
   const handleManageDiscussions = () => {
     navigation.navigate('ChatScreen');

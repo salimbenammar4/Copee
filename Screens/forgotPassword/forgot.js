@@ -36,10 +36,10 @@ const goback = () =>{
                 <Image source={{ uri: 'https://www.copee.eu/wp-content/uploads/2022/01/logo-white-02-3.png' }} style={styles.heroimg} resizeMode="contain"/>
               </View>
               <Text style={styles.logoText}>Mot de passe oublié?</Text>
-              <Text style={{ textAlign: 'center', color: "black" }}>Veuillez entrer votre Email pour récouvrir votre mot de passe</Text>
+              <Text style={{ textAlign: 'center', color: "black", marginBottom:10 }}>Veuillez entrer votre Email pour réinitialiser votre mot de passe</Text>
               <TextInput
                 placeholder="Email"
-                placeholderTextColor="#000000"
+                placeholderTextColor="grey"
                 style={styles.loginFormTextInput}
                 value={email}
                 onChangeText={(text) => setEmail(text)}

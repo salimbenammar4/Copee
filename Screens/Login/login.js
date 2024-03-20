@@ -29,15 +29,18 @@ const LoginScreen = () => {
       setLoading(true);
       const response = await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
-      if (response.user.email.endsWith('@copeeadmin.eu')){
-        navigation.replace('dashboard')}
-      else{
-      if (!response.user.emailVerified) {
-        alert('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
-        throw new Error('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
+      if (response.user.email.endsWith('@copeeadmin.eu')) {
+        navigation.replace('dashboard');
+      } else if (response.user.email.endsWith('@copeepers.eu')) {
+        navigation.replace('PersonnelDashboard');
+      } else {
+        if (!response.user.emailVerified) {
+          alert('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
+          throw new Error('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
+        }
+        navigation.replace('Home');
       }
-      navigation.replace('Home');
-    }} catch (error) {
+    } catch (error) {
       setAuthError('Vérifiez vos données.');
       console.log(error);
       setLoading(false);

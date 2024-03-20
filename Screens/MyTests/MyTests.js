@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Image, ImageBackground, Alert } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Image, ImageBackground, Alert, StatusBar } from 'react-native';
 import { db } from '../../firebase';
 import { collection, query, getDocs, deleteDoc } from '@firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -26,15 +26,17 @@ const MyTests = () => {
         fetchedTests.push({ id: doc.id, ...doc.data() });
       });
       setTests(fetchedTests);
-      setLoading(false);
     } catch (error) {
-      console.error('Error fetching tests: ', error);
+      console.error('Error fetching tests:', error);
+      Alert.alert('Error', 'An error occurred while fetching tests. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
-
   useEffect(() => {
-    fetchTests();
+    const intervalId = setInterval(fetchTests, 1000); 
+    return () => clearInterval(intervalId);
   }, []);
 
 
@@ -46,7 +48,18 @@ const MyTests = () => {
   const gototest = () => {
     navigation.navigate("test");
   };
-
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'En Attente...':
+        return 'yellow';
+      case 'Accepté':
+        return '#90EE90';
+      case 'Refusé':
+        return 'red';
+      default:
+        return 'white';
+    }
+  };
 
   const deleteTest = async (id) => {
     console.log('Deleting test with id:', id);
@@ -65,14 +78,23 @@ const MyTests = () => {
 
   if (loading) {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
+        <>
+        <StatusBar barStyle="light-content" />
+      <View style={{flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',}}>
+        <ActivityIndicator size="large" color="white" />
       </View>
+      </>
+      </ImageBackground>
     );
   }
 
   return (
     <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
+      <>
+      <StatusBar barStyle="light-content" />
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Liste des Tests</Text>
@@ -81,38 +103,44 @@ const MyTests = () => {
           </TouchableOpacity>
         </View>
         <ScrollView>
-          {tests.length > 0 ? (
-            tests.map((test, index) => (
-              <View key={index} style={styles.userData}>
-                <TouchableOpacity style={styles.trashIconContainer} onPress={() => deleteTest(test.id)}>
-                  <MaterialIcons name="delete" size={24} color="red" />
-                </TouchableOpacity>
-                <Text style={styles.userDataText}>Facture Mensuelle: {test.FactureMensuelle}</Text>
-                <Text style={styles.userDataText}>Revenu Fiscal: {test.RevenuFiscal}</Text>
-                <Text style={styles.userDataText}>Nb Personnes: {test.NbPersonnes}</Text>
-                <Text style={styles.userDataText}>Proprietaire: {test.Proprietaire}</Text>
-                <Text style={styles.userDataText}>Type Installation: {test.TypeInstallation}</Text>
-                <Text style={styles.userDataText}>Contact: {test.Contact}</Text>
-                <Text style={styles.userDataText}>Status: {test.Status}</Text>
-              </View>
-            ))
-          ) : (
-            <View style={styles.noTestsContainer}>
-              <View style={styles.hero}>
-                <Image source={require('../../assets/COPEE.png')} style={styles.heroimg} resizeMode="contain" />
-              </View>
-              <Text style={styles.noTestsText}>Vous n'avez pas de tests enregistrés.</Text>
-              <Text style={[styles.noTestsText, { marginTop: 60 }]}>Vous pouvez demander un test pour profiter de nos installations!</Text>
-              <TouchableOpacity style={styles.testbutton} onPress={gototest}>
-                <Text style={styles.testbuttontext}>Demander un test d'éligibilité</Text>
-              </TouchableOpacity>
-            </View>
-          )}
+        {tests.length > 0 ? (
+  tests.map((test, index) => (
+    <View key={index} style={styles.userData}>
+      <TouchableOpacity style={styles.trashIconContainer} onPress={() => deleteTest(test.id)}>
+        <MaterialIcons name="delete" size={24} color="white" />
+      </TouchableOpacity>
+      <Text style={styles.userDataText}>Facture Mensuelle: {test.FactureMensuelle}</Text>
+      <Text style={styles.userDataText}>Revenu Fiscal: {test.RevenuFiscal}</Text>
+      <Text style={styles.userDataText}>Nombre de personnes à charge: {test.NbPersonnes}</Text>
+      <Text style={styles.userDataText}>Proprietaire depuis 2 ans: {test.Proprietaire}</Text>
+      <Text style={styles.userDataText}>Type d'installation: {test.TypeInstallation}</Text>
+      <Text style={styles.userDataText}>Préférence pour étre contacté: {test.Contact}</Text>
+      <Text style={[styles.userDataText, { color: getStatusColor(test.Status) }]}>Status: {test.Status}</Text>
+      {test.Status === 'Accepté' && (
+        <TouchableOpacity style={styles.buttond} onPress={() => console.log('Button clicked')}>
+          <Text style={styles.buttonText}>Dériger vers la demande</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  ))
+) : (
+  <View style={styles.noTestsContainer}>
+    <View style={styles.hero}>
+      <Image source={require('../../assets/COPEE.png')} style={styles.heroimg} resizeMode="contain" />
+    </View>
+    <Text style={styles.noTestsText}>Vous n'avez pas de tests enregistrés.</Text>
+    <Text style={[styles.noTestsText, { marginTop: 50 }]}>Vous pouvez demander un test pour profiter de nos installations!</Text>
+    <TouchableOpacity style={styles.testbutton} onPress={gototest}>
+      <Text style={styles.testbuttontext}>Demander un test d'éligibilité</Text>
+    </TouchableOpacity>
+  </View>
+)}
         </ScrollView>
         <TouchableOpacity style={styles.button} onPress={retour}>
           <Text style={styles.buttonText}>Retour</Text>
         </TouchableOpacity>
       </View>
+      </>
     </ImageBackground>
   );
 };
@@ -121,7 +149,6 @@ const MyTests = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     paddingHorizontal: 20,
     paddingTop: 40,
   },
@@ -134,7 +161,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: 'white',
   },
   addButton: {
     backgroundColor: '#65539E',
@@ -156,6 +183,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   userDataText: {
+    color:"white",
     fontSize: 16,
     marginBottom: 5,
   },
@@ -166,7 +194,7 @@ const styles = StyleSheet.create({
   },
   noTestsText: {
     fontSize: 21,
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
   },
   button: {
@@ -182,8 +210,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   hero: {
-    backgroundColor: "dBdffe",
-    padding: 16,
+    padding: 50,
     borderRadius: 16,
     margin: 5,
   },
@@ -217,6 +244,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  buttond: {
+    backgroundColor: '#65539E',
+    paddingVertical: 15,
+    borderRadius: 10,
+    }
 });
 
 
