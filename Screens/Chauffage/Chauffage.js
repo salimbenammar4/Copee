@@ -10,9 +10,9 @@ const Chauffage = () => {
     const navigation = useNavigation();
 
     return (
-        <ImageBackground source={require('../../assets/chauff.png')} style={style.background}>
+        <ImageBackground source={require('../../assets/backkk.jpg')} style={style.background}>
             <>
-                <StatusBar backgroundColor="#c9392c" barStyle="light-content" />
+                <StatusBar  barStyle="light-content" />
                 <View style={style.header}>
                     <TouchableOpacity
                         style={style.menuButton}
@@ -34,7 +34,7 @@ const Chauffage = () => {
                     <View style={styles.hero}>
                         <Text style={style.heroTitle}>Présentation</Text>
                         <Image
-                            source={require('../../assets/split.png')}
+                            source={require('../../assets/split.jpg')}
                             style={style.image} 
                         />
                         <Text style={style.description}>

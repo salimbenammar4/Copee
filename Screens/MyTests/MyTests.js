@@ -125,9 +125,6 @@ const MyTests = () => {
   ))
 ) : (
   <View style={styles.noTestsContainer}>
-    <View style={styles.hero}>
-      <Image source={require('../../assets/COPEE.png')} style={styles.heroimg} resizeMode="contain" />
-    </View>
     <Text style={styles.noTestsText}>Vous n'avez pas de tests enregistrés.</Text>
     <Text style={[styles.noTestsText, { marginTop: 50 }]}>Vous pouvez demander un test pour profiter de nos installations!</Text>
     <TouchableOpacity style={styles.testbutton} onPress={gototest}>
@@ -191,6 +188,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:120
   },
   noTestsText: {
     fontSize: 21,

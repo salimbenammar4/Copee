@@ -63,7 +63,6 @@ const Test = () => {
     return (
         <ImageBackground source={require('../../assets/domo.png')} style={style.background}>
             <>
-                <StatusBar backgroundColor="#8c919a" barStyle="light-content" />
 
                 <View style={style.header}>
                     <TouchableOpacity
@@ -172,7 +171,7 @@ const style = StyleSheet.create({
         resizeMode: 'cover',
     },
     header: {
-        marginTop: 40,
+        marginTop: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },

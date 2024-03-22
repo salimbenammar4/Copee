@@ -39,7 +39,7 @@ const HomeScreen = () => {
   return (
     <ImageBackground source={require('../../assets/man.jpg')} style={styles.background}>
       <>
-        <StatusBar backgroundColor="#9eb8cf" barStyle="dark-content" />
+        
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.menuButton}

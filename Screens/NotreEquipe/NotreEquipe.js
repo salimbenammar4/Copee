@@ -10,9 +10,9 @@ const NotreEquipe = () => {
     const navigation = useNavigation();
 
     return (
-        <ImageBackground source={require('../../assets/image3.jpg')} style={style.background}>
+        <ImageBackground source={require('../../assets/back6.jpg')} style={style.background}>
             <>
-                <StatusBar backgroundColor="#1f85f3" barStyle="light-content" />
+                <StatusBar barStyle="light-content" />
                 <View style={style.header}>
                     <TouchableOpacity
                         style={style.menuButton}

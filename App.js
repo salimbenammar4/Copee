@@ -82,7 +82,7 @@ const App = () => {
                         headerTintColor: 'white', // Text color for the header
                         headerTitleStyle: {
                             fontWeight: 'bold',
-                        },
+                        },title: "Modifier le profil"
                     }}/>
   <Stack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }}/>
   <Stack.Screen name="ManageUsers" component={ManageUsers} options={{ headerShown: false }}/>

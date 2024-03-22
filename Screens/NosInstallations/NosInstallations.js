@@ -13,7 +13,7 @@ const NosInstallations = () => {
     return (
         <ImageBackground source={require('../../assets/backk.jpg')} style={style.background}>
             <>
-            <StatusBar barStyle="dark-content" />
+            
                 <View style={style.header}>
                     <TouchableOpacity
                         style={style.menuButton}

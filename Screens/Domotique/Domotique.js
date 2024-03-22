@@ -10,9 +10,9 @@ const Domotique = () => {
     const navigation = useNavigation();
 
     return (
-        <ImageBackground source={require('../../assets/domo.png')} style={style.background}>
+        <ImageBackground source={require('../../assets/back5.jpg')} style={style.background}>
             <>
-                <StatusBar backgroundColor="#8c919a" barStyle="light-content" />
+                <StatusBar  barStyle="light-content" />
                 <View style={style.header}>
                     <TouchableOpacity
                         style={style.menuButton}
@@ -46,7 +46,7 @@ const Domotique = () => {
                     <View style={styles.hero}>
                         <Text style={style.heroTitle}>L’autoconsommation simplifiée.</Text>
                         <Image
-                            source={require('../../assets/domop.jpg')}
+                            source={require('../../assets/domop.png')}
                             style={style.image}
                         />
                         <Text style={style.description}>Elios4you est un moyen innovant pour optimiser l’autoconsommation et suivre votre installation PV via une application intelligente, développée par 4-noks. Les données, en direct, sont disponibles sur n’importe quel smartphone ou tablette et accessibles n’importe où, n’importe quand. Elios4you mesure très précisément l’énergie générée, consommée, et échangée avec le réseau, la consommation globale de la maison ainsi que le niveau d’autoconsommation atteint.</Text>

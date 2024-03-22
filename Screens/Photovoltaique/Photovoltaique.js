@@ -12,7 +12,7 @@ const Photovoltaic = () => {
     return (
         <ImageBackground source={require('../../assets/photo.png')} style={style.background}>
             <>
-                <StatusBar backgroundColor="#7f50f2" barStyle="light-content" />
+                <StatusBar barStyle="light-content" />
                 <View style={style.header}>
                     <TouchableOpacity
                         style={style.menuButton}
