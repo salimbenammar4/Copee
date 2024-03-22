@@ -86,7 +86,7 @@ const Profile= () => {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: "absolute", left: 0 }}></TouchableOpacity>
             </View>
             <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View contentContainerStyle={{ flexGrow: 1 }}>
             <View style={{ alignItems: "center", marginVertical: 22 }}>
         <Image
                             source={{ uri: selectedImage }}
@@ -114,7 +114,7 @@ const Profile= () => {
                 />
 		</View>
           </View>
-      </ScrollView>
+      </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
     </ImageBackground>

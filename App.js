@@ -29,6 +29,7 @@ import MessageScreen from './Screens/MessageScreen'
 import NosInstallations from './Screens/NosInstallations/NosInstallations';
 import MyTests from './Screens/MyTests/MyTests';
 import PersonnelDashboard from './Screens/PersonnelDashboard/PersonnelDashboard';
+import AllTests from './Screens/PersonnelDashboard/AllTests';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -89,9 +90,11 @@ const App = () => {
   <Stack.Screen name="Personnel" component={ManagePersonnel} options={{ headerShown: false }}/>
   <Stack.Screen name="Clients" component={ManageClients} options={{ headerShown: false }}/>
   <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>   
-  <Stack.Screen name="ChatScreen" component={ChatScreen}/>    
+  <Stack.Screen name="ChatScreen" component={ChatScreen} options={ {title: "Chat"} }/>    
   <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>  
   <Stack.Screen name="PersonnelDashboard" component={PersonnelDashboard} options={{ headerShown: false }}/> 
+  <Stack.Screen name="AllTests" component={AllTests} options={{ headerShown: false }}/> 
+
           
 </Stack.Navigator>
     </NavigationContainer>

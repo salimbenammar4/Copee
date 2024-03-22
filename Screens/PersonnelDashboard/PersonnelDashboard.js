@@ -13,6 +13,10 @@ const PersonnelDashboard = () => {
         navigation.navigate('ChatScreen');
     };
 
+    const alltests=()=>{
+        navigation.navigate('AllTests');
+    }
+
     const handleLogout = async () => {
         try {
             await signOut(FIREBASE_AUTH);
@@ -26,7 +30,7 @@ const PersonnelDashboard = () => {
         <ImageBackground source={require('../../assets/back4.jpg')} style={localStyles.background}>
             <>
                 <StatusBar backgroundColor="black" barStyle="light-content" />
-                <ScrollView contentContainerStyle={localStyles.container}>
+                <View contentContainerStyle={localStyles.container}>
                     <View style={styles.hero}>
                         <Image
                             source={{ uri: 'https://www.copee.eu/wp-content/uploads/2022/01/logo-white-02-3.png' }}
@@ -37,7 +41,7 @@ const PersonnelDashboard = () => {
                     <TouchableOpacity style={localStyles.button} onPress={handleManageDiscussions}>
                         <Text style={localStyles.buttonText}>Gérer les discussions</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={localStyles.button} onPress={handleLogout}>
+                    <TouchableOpacity style={localStyles.button} onPress={alltests}>
                         <Text style={localStyles.buttonText}>Gérer les tests d'éligibilité</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={localStyles.button} onPress={handleLogout}>
@@ -46,7 +50,7 @@ const PersonnelDashboard = () => {
                     <TouchableOpacity style={[localStyles.logoutbutton,{marginTop:270}]} onPress={handleLogout}>
                         <Text style={localStyles.buttonText}>Se Déconnecter</Text>
                     </TouchableOpacity>
-                </ScrollView>
+                </View>
             </>
         </ImageBackground>
     );
@@ -65,6 +69,8 @@ const localStyles = StyleSheet.create({
         paddingHorizontal: 30,
         marginBottom: 20,
         borderRadius: 10,
+       width:300,
+       alignSelf:'center'
     },
     buttonText: {
         color: 'white',
@@ -84,6 +90,8 @@ const localStyles = StyleSheet.create({
         paddingHorizontal: 30,
         marginBottom: 20,
         borderRadius: 10,
+        width:300,
+       alignSelf:'center'
     },
 });
 

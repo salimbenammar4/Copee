@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Login/style';
 import { Picker } from '@react-native-picker/picker';
-import { addDoc, collection, serverTimestamp } from '@firebase/firestore';
+import { addDoc, collection, serverTimestamp, updateDoc, doc } from '@firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase';
 
@@ -21,36 +21,43 @@ const Test = () => {
     const auth = getAuth();
     const user = auth.currentUser;
 
-    const saveTestToFirestore=()=>{
-        if (RevenuFiscal === "" || FactureMensuelle===""){
-        alert(
-            "Vérifiez les champs"
-        );
-         return;}
-    addDoc(collection(db,"users",user.uid,"Tests"), {
-      createdAt: serverTimestamp(),
-      FactureMensuelle: FactureMensuelle,
-      RevenuFiscal: RevenuFiscal,
-      NbPersonnes:selectedOption1,
-      Proprietaire:selectedOption2,
-      TypeInstallation: selectedOption3,
-      Contact:selectedOption4,
-      Status: 'En Attente...'
-    });
-    Alert.alert(
-        "Succées",
-        "Vous avez ajouté une demande de test d'éligibilité. Le Personnel va vous contacter aussi vite que possible.",
-        [
+    const saveTestToFirestore = async () => {
+        if (RevenuFiscal === "" || FactureMensuelle === "") {
+          alert("Vérifiez les champs");
+          return;
+        }
+      
+        const docRef = await addDoc(collection(db, "users", user.uid, "Tests"), {
+            userId: user.uid,
+          createdAt: serverTimestamp(),
+          FactureMensuelle: FactureMensuelle,
+          RevenuFiscal: RevenuFiscal,
+          NbPersonnes: selectedOption1,
+          Proprietaire: selectedOption2,
+          TypeInstallation: selectedOption3,
+          Contact: selectedOption4,
+          Status: 'En Attente...'
+        });
+      
+        const testId = docRef.id;
+      
+        // Now update the document with the testId
+        await updateDoc(doc(db, "users", user.uid, "Tests", docRef.id), {
+          testId: testId
+        });
+      
+        Alert.alert(
+          "Succées",
+          "Vous avez ajouté une demande de test d'éligibilité. Le Personnel va vous contacter aussi vite que possible.",
+          [
             {
-                text: "Ok",
-                onPress: () => navigation.navigate("MyTests"),
-                
-            },
-        ],
-        { cancelable: false }
-    );
-    
-    }
+              text: "Ok",
+              onPress: () => navigation.navigate("MyTests")
+            }
+          ],
+          { cancelable: false }
+        );
+      };
 
     
     return (
