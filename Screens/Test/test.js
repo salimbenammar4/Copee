@@ -84,7 +84,6 @@ const Test = () => {
                 
                 <ScrollView>
                     <View style={styles.hero}>
-                        <Text style={style.heroTitle}>Test d'éligibilité</Text>
                         <Text style={style.subtitle}>Si votre propriété peut faire l’objet d’un projet de rénovation, vous pouvez certainement bénéficier de nombreuses aides !</Text>
                         <Text  style={[style.subtitle, {textAlign: 'left'}]}>Facture Mensuelle:</Text>
                         <TextInput
@@ -171,7 +170,7 @@ const style = StyleSheet.create({
         resizeMode: 'cover',
     },
     header: {
-        marginTop: 10,
+        marginTop: 20,
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -184,7 +183,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 15,
+        fontSize: 19,
         lineHeight: 20,
         marginTop: 10,
         textAlign: 'center',
@@ -219,7 +218,7 @@ const style = StyleSheet.create({
         borderColor: '#fff',
     },
     picker: {
-        color: '#000',
+        color: 'black',
         height: 50,
         width: '100%',
     },

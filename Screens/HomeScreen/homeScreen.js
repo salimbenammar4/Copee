@@ -37,7 +37,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <ImageBackground source={require('../../assets/man.jpg')} style={styles.background}>
+    <ImageBackground source={require('../../assets/panel.jpg')} style={styles.background}>
       <>
         
         <View style={styles.header}>

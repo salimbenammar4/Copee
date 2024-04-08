@@ -27,7 +27,7 @@ import SenderMessage from "../components/SenderMessage";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
 import 'tailwindcss/tailwind';
-
+import { Feather } from '@expo/vector-icons';
 const MessagesScreen = () => {
   const auth = getAuth();
   const user = auth.currentUser;
@@ -98,7 +98,7 @@ const MessagesScreen = () => {
             value={input}
           />
           <TouchableOpacity onPress={sendMessage}>
-            <Text className="text-[#FF5864] text-lg">Send</Text>
+          <Feather name="send" size={24} color="black" />
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

@@ -18,16 +18,12 @@ const Profile= () => {
   const navigation = useNavigation();
   useEffect(() => {
     const fetchUserData = async () => {
-        console.log('Fetching user data...');
-        console.log('User ID:', user?.uid);
-      
         try {
           const userQuery = query(collection(db, 'users'), where('UserId', '==', user.uid));
           const querySnapshot = await getDocs(userQuery);
           
           if (!querySnapshot.empty) {
             const userDoc = querySnapshot.docs[0];
-            console.log('User data:', userDoc.data());
             setUserData(userDoc.data());
           } else {
             console.log('No matching user document found');
@@ -38,7 +34,8 @@ const Profile= () => {
           setLoading(false);
         }
       };
-      const fetchProfilePicture = async () => {
+
+    const fetchProfilePicture = async () => {
         try {
             const profileRef = ref2(database, `Profile-IDs/${userId}`);
             const profileSnapshot = await get(profileRef);
@@ -51,19 +48,31 @@ const Profile= () => {
         }
     };
 
+    // Initial fetch
+    fetchUserData();
     if (userId) {
         fetchProfilePicture();
     }
-      
 
-    fetchUserData();
-  }, [userId]);
+    // Fetch every 1 second
+    const intervalId = setInterval(() => {
+        fetchUserData();
+        if (userId) {
+            fetchProfilePicture();
+        }
+    }, 1000);
+
+    // Clear interval on unmount
+    return () => clearInterval(intervalId);
+}, [userId]);
 
   if (loading) {
     return (
+      <ImageBackground source={require('../../assets/panel2.jpg')} style={style.background}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#FFFFFF" />
       </View>
+      </ImageBackground>
     );
   }
   const modifyprofile = () => {
@@ -80,7 +89,7 @@ const Profile= () => {
 };
 
   return (
-    <ImageBackground source={require('../../assets/image2.jpg')} style={style.background}>
+    <ImageBackground source={require('../../assets/panel2.jpg')} style={style.background}>
     <SafeAreaView style={{ flex: 1, paddingHorizontal: 22, marginTop:'30%' }}>
             <View style={{ marginHorizontal: 12, flexDirection: "row", justifyContent: "center" }}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: "absolute", left: 0 }}></TouchableOpacity>

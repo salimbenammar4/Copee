@@ -10,7 +10,7 @@ const Chauffage = () => {
     const navigation = useNavigation();
 
     return (
-        <ImageBackground source={require('../../assets/backkk.jpg')} style={style.background}>
+        <ImageBackground source={require('../../assets/chauffapp.jpg')} style={style.background}>
             <>
                 <StatusBar  barStyle="light-content" />
                 <View style={style.header}>

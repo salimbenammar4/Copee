@@ -68,7 +68,7 @@ const App = () => {
   <Stack.Screen name="NewsDetails" component={NewsDetailsScreen}/>
   <Stack.Screen name="Profile" component={Profile} options={{
                         headerStyle: {
-                            backgroundColor: '#91b8df', // Header color for NotreEquipe screen
+                            backgroundColor: '#4c4849', // Header color for NotreEquipe screen
                         },
                         headerTintColor: 'white', // Text color for the header
                         headerTitleStyle: {
@@ -77,7 +77,7 @@ const App = () => {
                     }}/>
   <Stack.Screen name="ModifyProfile" component={ModifyProfile} options={{
                         headerStyle: {
-                            backgroundColor: '#91b8df', // Header color for NotreEquipe screen
+                            backgroundColor: '#4c4849', // Header color for NotreEquipe screen
                         },
                         headerTintColor: 'white', // Text color for the header
                         headerTitleStyle: {

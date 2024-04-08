@@ -105,7 +105,7 @@ const ModifyProfile = ({ navigation }) => {
                 await updateDoc(docRef, updatedData);
                 Alert.alert(
                     "Succées",
-                    "Modification effectuées avec succées",
+                    "Modifications effectuées avec succées",
                     [
                         {
                             text: "Parfait!",
@@ -168,7 +168,7 @@ try {
     
 
     return (
-        <ImageBackground source={require('../../assets/image2.jpg')} style={style.background}>
+        <ImageBackground source={require('../../assets/panel2.jpg')} style={style.background}>
         <SafeAreaView style={{ flex: 1, paddingHorizontal: 22 }}>
             <View style={{ marginHorizontal: 12, flexDirection: "row", justifyContent: "center" }}>
                 <TouchableOpacity onPress={() => Navigation.goBack()} style={{ position: "absolute", left: 0 }}></TouchableOpacity>

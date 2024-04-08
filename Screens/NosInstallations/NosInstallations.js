@@ -11,7 +11,7 @@ const { width } = Dimensions.get('window');
 const NosInstallations = () => {
     const navigation=useNavigation();
     return (
-        <ImageBackground source={require('../../assets/backk.jpg')} style={style.background}>
+        <ImageBackground source={require('../../assets/nosinstallations.jpg')} style={style.background}>
             <>
             
                 <View style={style.header}>
@@ -19,7 +19,7 @@ const NosInstallations = () => {
                         style={style.menuButton}
                         onPress={() => navigation.openDrawer()}
                     >
-                        <MaterialCommunityIcons name="menu" size={24} color="black" />
+                        <MaterialCommunityIcons name="menu" size={24} color="white" />
                     </TouchableOpacity>
                     <View style={style.titleContainer}>
                         <Text style={style.title}>Nos Installations</Text>
@@ -28,7 +28,7 @@ const NosInstallations = () => {
                         style={style.profileButton}
                         onPress={() => navigation.navigate('Profile')}
                     >
-                        <MaterialCommunityIcons name="account-circle" size={24} color="black" />
+                        <MaterialCommunityIcons name="account-circle" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
                 <ScrollView contentContainerStyle={style.container}>
@@ -63,7 +63,7 @@ const NosInstallations = () => {
                             <Paragraph style={style.cardText}>Le ballon solaire également appelé chauffe-eau solaire permet tout comme le ballon thermodynamique de réchauffer l'eau chaude sanitaire. Cependant, contrairement au ballon thermodynamique, le Ballon Solaire fonctionne lui grâce à des panneaux solaires thermiques.</Paragraph>
                         </Card.Content>
                     </Card>
-                    <Button mode="contained" style={style.button}>Tester l'Eligibilité</Button>
+                    
                 </ScrollView>
             </>
         </ImageBackground>
@@ -74,26 +74,45 @@ const style = StyleSheet.create({
     container: {
         flexGrow: 1,
         alignItems: 'center',
-        padding: 20,
+        paddingTop: 40,
+        paddingHorizontal: 20,
     },
     card: {
         width: '100%',
         marginBottom: 20,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white background
+        borderRadius: 10,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     cardImage: {
         height: 200,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
     cardTitle: {
         textAlign: 'center',
         color: 'blue',
-        fontSize: 28,
+        fontSize: 24,
         marginTop: 10
     },
     cardText: {
-        marginTop: 20,
+        marginTop: 15,
+        paddingHorizontal: 10,
+        marginBottom: 15,
     },
     button: {
         marginTop: 20,
+        borderRadius: 20,
+        width: '50%',
+        alignSelf: 'center',
+        backgroundColor: 'blue',
     },
     background: {
         flex: 1,
@@ -119,55 +138,10 @@ const style = StyleSheet.create({
         marginTop: 10,
         textAlign: 'center',
         marginBottom: 10,
-        color: 'black',
+        color: 'white',
     },
     profileButton: {
         marginRight: 20,
     },
-    heroTitle: {
-        textAlign: 'center',
-        fontSize: 34,
-        color: 'white',
-        fontWeight: 'bold',
-        fontStyle: 'italic',
-        marginTop: 20,
-    },
-    heroDescription: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontWeight: '500',
-        color: 'white',
-        marginTop: 18,
-        marginBottom: 20,
-    },
-    section: {
-        alignItems: 'center',
-        marginBottom: 30,
-    },
-    sectionTitle: {
-        fontSize: 20,
-        fontWeight: '500',
-        color: 'white',
-        fontStyle: 'italic',
-        marginTop: 20,
-        textAlign: 'center',
-    },
-    sectionDescription: {
-        fontSize: 15,
-        fontWeight: '500',
-        color: 'white',
-        marginTop: 10,
-        textAlign: 'center',
-        paddingHorizontal: 20,
-    },
-    image: {
-        width: width * 0.7,
-        height: 200,
-        borderRadius: 100,
-        marginBottom: 10,
-        alignSelf: 'center'
-    },
 });
-
-
 export default NosInstallations;
