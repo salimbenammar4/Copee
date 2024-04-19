@@ -41,7 +41,6 @@ const Test = () => {
       
         const testId = docRef.id;
       
-        // Now update the document with the testId
         await updateDoc(doc(db, "users", user.uid, "Tests", docRef.id), {
           testId: testId
         });

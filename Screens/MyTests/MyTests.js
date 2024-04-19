@@ -118,7 +118,7 @@ const MyTests = () => {
       <Text style={[styles.userDataText, { color: getStatusColor(test.Status) }]}>Status: {test.Status}</Text>
       {test.Status === 'Accepté' && (
         <TouchableOpacity style={styles.buttond} onPress={() => console.log('Button clicked')}>
-          <Text style={styles.buttonText}>Dériger vers la demande</Text>
+          <Text style={styles.buttonText}>Diriger vers la demande</Text>
         </TouchableOpacity>
       )}
     </View>
