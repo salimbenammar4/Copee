@@ -18,6 +18,7 @@ const ModifyProfile = ({ navigation }) => {
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
     const [adresse, setAdresse] = useState('');
+    const [numtel,setNumtel] = useState('');
     const userId=FIREBASE_AUTH.currentUser.uid;
     const [loading, setLoading] = useState(false);
     const auth = getAuth();
@@ -102,6 +103,7 @@ const ModifyProfile = ({ navigation }) => {
                 if (nom !== '') updatedData['Nom'] = nom;
                 if (prenom !== '') updatedData['Prenom'] = prenom;
                 if (adresse !== '') updatedData['Adresse'] = adresse;
+                if (numtel !== '') updatedData['PhoneNumber']=numtel;
                 await updateDoc(docRef, updatedData);
                 Alert.alert(
                     "Succées",
@@ -284,6 +286,40 @@ try {
                                     }}
                                     value={adresse}
                                     onChangeText={(text) => setAdresse(text)}
+                                />
+
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: "column", marginBottom: 6 }}>
+                            <Text style={{ fontSize: 16, lineHeight: 20, color:'white' }}>Numéro de téléphone:</Text>
+                            <View style={{
+                                height: 44,
+                                width: "100%",
+                                borderColor: 'rgba(84, 76, 76, 0.14)',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                marginVertical: 6,
+                                justifyContent: "center",
+                                paddingLeft: 0
+                            }}>
+                                <TextInput
+                                    placeholder="Numéro de téléphone"
+                                    placeholderColor="#000000"
+                                    style={{
+                                        height: 43,
+                                        fontSize: 14,
+                                        borderRadius: 5,
+                                        borderWidth: 1,
+                                        borderColor: "#eaeaea",
+                                        backgroundColor: "#fafafa",
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        width: 300,
+                                    }}
+                                    value={numtel}
+                                    onChangeText={(text) => setNumtel(text)}
                                 />
 
                             </View>

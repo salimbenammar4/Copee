@@ -18,53 +18,47 @@ const Profile= () => {
   const navigation = useNavigation();
   useEffect(() => {
     const fetchUserData = async () => {
-        try {
-          const userQuery = query(collection(db, 'users'), where('UserId', '==', user.uid));
-          const querySnapshot = await getDocs(userQuery);
-          
-          if (!querySnapshot.empty) {
-            const userDoc = querySnapshot.docs[0];
-            setUserData(userDoc.data());
-          } else {
-            console.log('No matching user document found');
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        } finally {
-          setLoading(false);
+      try {
+        if (!user || !user.uid) return; // Guard against accessing properties of null user or user.uid
+        const userQuery = query(collection(db, 'users'), where('UserId', '==', user.uid));
+        const querySnapshot = await getDocs(userQuery);
+        
+        if (!querySnapshot.empty) {
+          const userDoc = querySnapshot.docs[0];
+          setUserData(userDoc.data());
+        } else {
+          console.log('No matching user document found');
         }
-      };
-
-    const fetchProfilePicture = async () => {
-        try {
-            const profileRef = ref2(database, `Profile-IDs/${userId}`);
-            const profileSnapshot = await get(profileRef);
-            const profileData = profileSnapshot.val();
-            if (profileData && profileData.profile_picture) {
-                setSelectedImage(profileData.profile_picture);
-            }
-        } catch (error) {
-            console.error("Error fetching profile picture:", error);
-        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false);
+      }
     };
-
-    // Initial fetch
-    fetchUserData();
-    if (userId) {
-        fetchProfilePicture();
-    }
-
-    // Fetch every 1 second
-    const intervalId = setInterval(() => {
-        fetchUserData();
-        if (userId) {
-            fetchProfilePicture();
+  
+    const fetchProfilePicture = async () => {
+      try {
+        if (!userId) return; // Guard against accessing properties of null userId
+        const profileRef = ref2(database, `Profile-IDs/${userId}`);
+        const profileSnapshot = await get(profileRef);
+        const profileData = profileSnapshot.val();
+        if (profileData && profileData.profile_picture) {
+          setSelectedImage(profileData.profile_picture);
         }
-    }, 1000);
-
-    // Clear interval on unmount
-    return () => clearInterval(intervalId);
-}, [userId]);
+      } catch (error) {
+        console.error("Error fetching profile picture:", error);
+      }
+    };
+  
+    if (user) {
+      fetchUserData();
+      if (userId) {
+        fetchProfilePicture();
+      }
+    }
+  }, []); 
+  
+  
 
   if (loading) {
     return (

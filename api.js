@@ -26,7 +26,7 @@ export const fetchNews = async () => {
       return data;
     } catch (error) {
       console.error('Error fetching news:', error);
-      return { error: 'Error fetching news' }; // You can handle the error in your component
+      return { error: 'Error fetching news' }; 
     }
   }
   

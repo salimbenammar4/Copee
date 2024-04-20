@@ -114,10 +114,10 @@ const SignupScreen = () => {
                 onChangeText={setAdresse}
               />
               <TextInput
-                placeholder="Numéro de téléphone" // Add placeholder for phone number
+                placeholder="Numéro de téléphone" 
                 style={styles.loginFormTextInput}
                 value={phoneNumber}
-                onChangeText={setPhoneNumber} // Bind onChangeText to setPhoneNumber
+                onChangeText={setPhoneNumber} 
               />
               <TextInput
                 placeholder="Email"
