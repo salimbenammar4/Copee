@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image,Linking} from 'react-native';
-import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons,FontAwesome6 } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons,FontAwesome6,MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 const SidebarScreen = () => {
   const auth = getAuth();
   const user = auth.currentUser;
@@ -27,9 +27,19 @@ const openLinkX = () => {
 const openLinkLinkedin = () => {
   Linking.openURL('https://www.linkedin.com/company/82936039/admin/');
 };
+const handleLogout = async () => {
+  try {
+      await signOut(auth);
+      navigation.navigate('Login'); 
+  } catch (error) {
+      console.error('Error signing out:', error);
+  }
+};
   return (
     <View style={{ flex: 1, alignItems: 'left', marginTop: '20%' }}>
       <Image source={{ uri: 'https://www.copee.eu/wp-content/uploads/2022/01/logo-white-02-3.png' }} style={styles.heroimg} resizeMode="contain"/>
+      <TouchableOpacity onPress={handleLogout}style={styles.logoutButton}>
+      <MaterialCommunityIcons name="logout" size={30} color="black"  /></TouchableOpacity>
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => {
@@ -182,6 +192,12 @@ const styles = {
   socialButton: {
     marginTop: 10, 
     marginRight: 20, 
+  },
+  logoutButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex:1,
   },
 };
 

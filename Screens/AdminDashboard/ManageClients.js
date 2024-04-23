@@ -36,10 +36,6 @@ const ManageClients = ({ navigation }) => {
   const handleDeleteUser = async (userId) => {
     try {
       console.log('Deleting user:', userId);
-      const user = FIREBASE_AUTH.currentUser;
-      const credential = getPasswordCredential();
-      await reauthenticateWithCredential(user, credential);
-      await deleteUser(user);
       await deleteDoc(doc(db, 'users', userId));
       Alert.alert('User deleted successfully');
     } catch (error) {

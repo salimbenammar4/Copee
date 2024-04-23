@@ -90,7 +90,9 @@ const App = () => {
   <Stack.Screen name="Personnel" component={ManagePersonnel} options={{ headerShown: false }}/>
   <Stack.Screen name="Clients" component={ManageClients} options={{ headerShown: false }}/>
   <Stack.Screen name="forgot" component={ForgotPasswordScreen} options={{ headerShown: false }}/>   
-  <Stack.Screen name="ChatScreen" component={ChatScreen} options={ {title: "Chat"} }/>    
+  <Stack.Screen name="ChatScreen" component={ChatScreen} options={ {title: "Chat", headerStyle: {
+                            backgroundColor: '#56c1d0', // Header color for NotreEquipe screen
+                        },} }/>    
   <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>  
   <Stack.Screen name="PersonnelDashboard" component={PersonnelDashboard} options={{ headerShown: false }}/> 
   <Stack.Screen name="AllTests" component={AllTests} options={{ headerShown: false }}/> 

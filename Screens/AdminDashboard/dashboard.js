@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Platform, StatusBar, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Platform, StatusBar, Dimensions, ImageBackground } from 'react-native';
 import { db } from '../../firebase';
 import styles from '../Login/style';
 import { getDocs } from '@firebase/firestore';
@@ -67,8 +67,10 @@ const Dashboard = ({ navigation }) => {
   };
 
   return (
+    <ImageBackground source={require('../../assets/admin12.jpg')} style={style.background}>
+      <>
     <ScrollView style={style.container}>
-      <StatusBar backgroundColor="black" barStyle="light-content" />
+      <StatusBar backgroundColor="black" barStyle="dark-content" />
       <View style={styles.hero}>
         <Image
           source={{ uri: 'https://www.copee.eu/wp-content/uploads/2022/01/logo-white-02-3.png' }}
@@ -105,6 +107,8 @@ const Dashboard = ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </>
+    </ImageBackground>
   );
 };
 
@@ -153,6 +157,10 @@ const style = StyleSheet.create({
   },
   cardText: {
     fontSize: 16,
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 

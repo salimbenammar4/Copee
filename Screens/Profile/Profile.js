@@ -17,6 +17,9 @@ const Profile= () => {
   const userId=FIREBASE_AUTH.currentUser.uid;
   const navigation = useNavigation();
   useEffect(() => {
+    let counter = 0;
+  const intervalId = setInterval(() => {
+    if (counter < 3) {
     const fetchUserData = async () => {
       try {
         if (!user || !user.uid) return; // Guard against accessing properties of null user or user.uid
@@ -56,7 +59,14 @@ const Profile= () => {
         fetchProfilePicture();
       }
     }
-  }, []); 
+    counter++;
+  } else {
+    clearInterval(intervalId);
+  }
+}, 2000); // Adjust the time interval as needed
+
+return () => clearInterval(intervalId); // Clean up on unmount
+}, []); 
   
   
 
@@ -73,14 +83,6 @@ const Profile= () => {
     navigation.navigate('ModifyProfile'); 
   };
 
-  const handleLogout = async () => {
-    try {
-        await signOut(auth);
-        navigation.navigate('Login'); 
-    } catch (error) {
-        console.error('Error signing out:', error);
-    }
-};
 
   return (
     <ImageBackground source={require('../../assets/panel2.jpg')} style={style.background}>
@@ -107,13 +109,6 @@ const Profile= () => {
                   buttonStyle={[styles.loginButton, { width: 300 }]}
                   onPress={modifyprofile}
                   title="Modifier le profil"
-                />
-		</View>
-        <View style={{marginTop:10}}>
-		<Button
-                  buttonStyle={[styles.loginButton, { width: 300 }]}
-                  onPress={handleLogout}
-                  title="Se déconnecter"
                 />
 		</View>
           </View>

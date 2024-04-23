@@ -27,7 +27,7 @@ const PersonnelDashboard = () => {
     };
 
     return (
-        <ImageBackground source={require('../../assets/back4.jpg')} style={localStyles.background}>
+        <ImageBackground source={require('../../assets/abcdefg.jpg')} style={localStyles.background}>
             <>
                 <StatusBar backgroundColor="black" barStyle="light-content" />
                 <View contentContainerStyle={localStyles.container}>

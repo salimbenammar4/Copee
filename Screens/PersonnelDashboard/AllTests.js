@@ -126,6 +126,7 @@ const MyTestsScreen = () => {
             <View key={index} style={styles.userData}>
             <Text style={styles.userDataText}>Nom: {test.Nom}</Text>
             <Text style={styles.userDataText}>Prénom: {test.Prenom}</Text>
+            <Text style={styles.userDataText}>Email: {test.Email}</Text>
             <Text style={styles.userDataText}>Adresse: {test.Adresse}</Text>
             <Text style={styles.userDataText}>Téléphone: {test.PhoneNumber}</Text>
             <Text style={styles.userDataText}>Facture Mensuelle: {test.FactureMensuelle}</Text>

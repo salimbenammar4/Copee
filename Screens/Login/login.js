@@ -4,9 +4,10 @@ import styles from "./style";
 import {Keyboard, KeyboardAvoidingView, Text, TextInput, TouchableWithoutFeedback, Image, ActivityIndicator} from "react-native";
 import { Button } from "react-native-elements";
 import { FIREBASE_AUTH } from "../../firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
-
+import { db } from "../../firebase";
+import { doc,getDoc } from "@firebase/firestore";
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +30,7 @@ const LoginScreen = () => {
       setLoading(true);
       const response = await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
+
       if (response.user.email.endsWith('@copeeadmin.eu')) {
         navigation.replace('dashboard');
       } else if (response.user.email.endsWith('@copeepers.eu')) {
@@ -37,6 +39,15 @@ const LoginScreen = () => {
         if (!response.user.emailVerified) {
           alert('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
           throw new Error('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
+        }else{      
+        const docRef=doc(db,"users",response.user.uid);
+        const docSnap=await getDoc(docRef);
+        if(!docSnap.exists()){
+          alert("Cet utilisateur n'est plus disponible");
+          await signOut(auth);
+          navigation.navigate('Login');
+          return;
+        }
         }
         navigation.replace('Home');
       }
