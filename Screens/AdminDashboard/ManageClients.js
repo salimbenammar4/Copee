@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, Alert, ScrollView, ImageBackground } from 'react-native';
 import { db, FIREBASE_AUTH } from '../../firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -45,13 +45,17 @@ const ManageClients = ({ navigation }) => {
   };
   if (loading) {
     return (
+      <ImageBackground source={require('../../assets/cl.jpg')} style={styles.background}>
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#4CAF50" />
+        <ActivityIndicator size="large" color="white" />
       </View>
+      </ImageBackground>
     );
   }
 
   return (
+    <ImageBackground source={require('../../assets/cl.jpg')} style={styles.background}>
+      <>
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.header}>
@@ -80,13 +84,14 @@ const ManageClients = ({ navigation }) => {
         <Text style={styles.buttonText}>Retour</Text>
       </TouchableOpacity>
     </View>
+    </>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     paddingHorizontal: 20,
     paddingTop: 40,
   },
@@ -112,6 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   userData: {
+    backgroundColor:'white',
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
@@ -149,6 +155,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 

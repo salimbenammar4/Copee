@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ImageBackground, StatusBar } from 'react-native';
 import styles from "../Login/style";
-import { Keyboard, KeyboardAvoidingView, Text, TextInput, TouchableWithoutFeedback, View, ActivityIndicator, ScrollView } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Text, TextInput, TouchableWithoutFeedback, View, ActivityIndicator, ScrollView,StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import { FIREBASE_AUTH, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -77,6 +77,7 @@ const Form = () =>{
     };
 
     return (
+      <ImageBackground source={require('../../assets/ad.jpg')} style={style.background}>
         <>
           <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
           <KeyboardAvoidingView style={styles.containerView} behavior="padding">
@@ -88,7 +89,7 @@ const Form = () =>{
                       selectedValue={role}
                       onValueChange={(itemValue, itemIndex) => setRole(itemValue)}
                     >
-                      <Picker.Item label="Admin" value="admin" />
+                      <Picker.Item label="Admin" value="admin" style={{backgroundColor:'white'}} />
                       <Picker.Item label="Personnel" value="personnel" />
                     </Picker>
                  
@@ -146,6 +147,14 @@ const Form = () =>{
             </TouchableWithoutFeedback>
           </KeyboardAvoidingView>
         </>
+        </ImageBackground>
       );
     }
 export default Form;
+
+const style=StyleSheet.create({
+  background:{
+    flex: 1,
+    resizeMode: 'cover',
+  },}
+)

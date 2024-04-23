@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Image, SafeAreaView, ScrollView, TouchableOpacity, KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, ActivityIndicator, Image, SafeAreaView, ScrollView, TouchableOpacity, KeyboardAvoidingView, StyleSheet, ImageBackground, StatusBar } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth';
 import { query, collection, where, getDocs} from 'firebase/firestore';
 import { db, FIREBASE_AUTH, database } from '../../firebase'; 

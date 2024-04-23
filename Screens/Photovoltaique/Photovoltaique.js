@@ -72,7 +72,7 @@ const Photovoltaic = () => {
                         <Text style={style.description}>
                             Si vous souhaitez nous contacter pour avoir des informations sur ce produit, veuillez remplir le formulaire ci-dessous. Nous vous recontacterons dans les plus brefs délais.
                         </Text>
-                        <TouchableOpacity style={style.button}>
+                        <TouchableOpacity style={style.button} onPress={() => navigation.navigate("MyTests")}>
                             <Text style={style.buttonText}>Tester l'éligibilité</Text>
                         </TouchableOpacity>
                     </View>

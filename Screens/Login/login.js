@@ -30,7 +30,14 @@ const LoginScreen = () => {
       setLoading(true);
       const response = await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
-
+      const docRef=doc(db,"users",response.user.uid);
+        const docSnap=await getDoc(docRef);
+        if(!docSnap.exists()){
+          alert("Cet utilisateur n'est plus disponible");
+          await signOut(auth);
+          navigation.navigate('Login');
+          return;
+        }
       if (response.user.email.endsWith('@copeeadmin.eu')) {
         navigation.replace('dashboard');
       } else if (response.user.email.endsWith('@copeepers.eu')) {
@@ -39,15 +46,6 @@ const LoginScreen = () => {
         if (!response.user.emailVerified) {
           alert('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
           throw new Error('Veuillez vérifier votre adresse e-mail pour activer votre compte.');
-        }else{      
-        const docRef=doc(db,"users",response.user.uid);
-        const docSnap=await getDoc(docRef);
-        if(!docSnap.exists()){
-          alert("Cet utilisateur n'est plus disponible");
-          await signOut(auth);
-          navigation.navigate('Login');
-          return;
-        }
         }
         navigation.replace('Home');
       }
