@@ -80,7 +80,7 @@ const style = StyleSheet.create({
     card: {
         width: '100%',
         marginBottom: 20,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white background
+        backgroundColor: 'rgba(255, 255, 255, 0.9)', 
         borderRadius: 10,
         shadowColor: 'black',
         shadowOffset: {

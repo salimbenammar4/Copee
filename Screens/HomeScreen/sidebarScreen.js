@@ -30,7 +30,7 @@ const openLinkLinkedin = () => {
 const handleLogout = async () => {
   try {
       await signOut(auth);
-      navigation.navigate('Login'); 
+      navigation.replace('Login'); 
   } catch (error) {
       console.error('Error signing out:', error);
   }

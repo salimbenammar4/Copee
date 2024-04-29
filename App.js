@@ -30,6 +30,10 @@ import NosInstallations from './Screens/NosInstallations/NosInstallations';
 import MyTests from './Screens/MyTests/MyTests';
 import PersonnelDashboard from './Screens/PersonnelDashboard/PersonnelDashboard';
 import AllTests from './Screens/PersonnelDashboard/AllTests';
+import DemandePanneaux from './Screens/Demande/DemandePanneaux';
+import DemandePompe from './Screens/Demande/DemandePompe';
+import DemandeBallon from './Screens/Demande/DemandeBallon';
+import DemandeThermo from './Screens/Demande/DemandeBallonThermodynamique';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -96,8 +100,10 @@ const App = () => {
   <Stack.Screen name="MessageScreen" component={MessageScreen} options={ {title: "Chat"} }/>  
   <Stack.Screen name="PersonnelDashboard" component={PersonnelDashboard} options={{ headerShown: false }}/> 
   <Stack.Screen name="AllTests" component={AllTests} options={{ headerShown: false }}/> 
-
-          
+  <Stack.Screen name="demandepanneaux" component={DemandePanneaux} options={{ headerShown: false }}/> 
+  <Stack.Screen name="demandepompe" component={DemandePompe} options={{ headerShown: false }}/>
+  <Stack.Screen name="demandeballon" component={DemandeBallon} options={{ headerShown: false }}/>
+  <Stack.Screen name="thermo" component={DemandeThermo} options={{ headerShown: false }}/>        
 </Stack.Navigator>
     </NavigationContainer>
   );
@@ -116,6 +122,7 @@ const HomeStack = () => {
       <Stack.Screen name="test" component={Test} options={{ headerShown: false }}/>
       <Stack.Screen name='NosInstallations' component={NosInstallations} options={{ headerShown: false }}/>
       <Stack.Screen name='MyTests' component={MyTests} options={{headerShown: false}}/>
+      
     </Drawer.Navigator>
   );
 };

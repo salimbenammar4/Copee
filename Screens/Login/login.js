@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar, TouchableOpacity, View } from 'react-native'; // Import TouchableOpacity and View
+import { StatusBar, TouchableOpacity, View } from 'react-native';
 import styles from "./style";
 import {Keyboard, KeyboardAvoidingView, Text, TextInput, TouchableWithoutFeedback, Image, ActivityIndicator} from "react-native";
 import { Button } from "react-native-elements";
 import { FIREBASE_AUTH } from "../../firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut, deleteUser } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
 import { doc,getDoc } from "@firebase/firestore";
@@ -17,12 +17,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user && user.emailVerified) {
-        navigation.replace('Home');
-      }
-    });
-    return unsubscribe;
+    
   }, []);
 
   const onLoginPress = async () => {
