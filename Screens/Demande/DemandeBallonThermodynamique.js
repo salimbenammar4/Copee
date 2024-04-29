@@ -60,7 +60,7 @@ const DemandeThermo = () => {
                 <ScrollView>
                     <View style={styles.hero}>
                         
-                        <Text  style={[style.subtitle, {textAlign: 'left'}]}>Type de panneaux:</Text>
+                        <Text  style={[style.subtitle, {textAlign: 'left'}]}>Type de Ballon:</Text>
                         <View style={style.pickerContainer}>
                             <Picker
                                 selectedValue={selectedOption1}
