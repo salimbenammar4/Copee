@@ -5,7 +5,7 @@ import { collection, query, getDocs, deleteDoc } from '@firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { doc, setDoc } from '@firebase/firestore';
+import { doc, setDoc, addDoc } from '@firebase/firestore';
 import StarRating from 'react-native-star-rating';
 
 const MyDemandes = () => {
@@ -19,6 +19,7 @@ const MyDemandes = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   const navigation = useNavigation();
+  const [DemandeFeedbackId, setDemandeFeedbackId]=useState();
 
   const fetchDemandes = async () => {
     try {
@@ -78,9 +79,9 @@ const MyDemandes = () => {
     }
   };
 
-  const submitFeedback = async () => {
+  const submitFeedback = async (demandeId) => {
     try {
-      await setDoc(collection(db, "Feedback"), {
+      await addDoc(collection(db, "users", user.uid,"Demandes",demandeId,"Feedbacks"), {
         userId: user.uid,
         feedback: feedback,
         rating: rating,
@@ -88,7 +89,7 @@ const MyDemandes = () => {
       setFeedback('');
       setRating(0);
       setModalVisible(false);
-      setFeedbackGiven([...feedbackGiven, demandId]); 
+      setFeedbackGiven([...feedbackGiven, demandeId]); 
       Alert.alert('Nous vous remercions pour votre feedback!');
     } catch (error) {
       console.error('Error submitting feedback:', error);
@@ -136,7 +137,7 @@ const MyDemandes = () => {
                   <Text style={styles.userDataText}>Date de début de travail: {formatDate(demande.dateDebutTravail)}</Text>
                   <Text style={[styles.userDataText, { color: getStatusColor(demande.Status) }]}>Status: {demande.Status}</Text>
                   {demande.Status === 'Traitée' && (
-                    <TouchableOpacity style={[styles.buttond, isFeedbackGiven(demande.id) && styles.buttonDisabled]} onPress={() => setModalVisible(true)}>
+                    <TouchableOpacity style={[styles.buttond, isFeedbackGiven(demande.id) && styles.buttonDisabled]} onPress={() => {setModalVisible(true); setDemandeFeedbackId(demande.id)}}>
                       <Text style={styles.buttonText}>Donnez votre avis!</Text>
                     </TouchableOpacity>
                   )}
@@ -179,7 +180,7 @@ const MyDemandes = () => {
               placeholder="Entrez votre avis ici..."
               multiline
             />
-            <TouchableOpacity style={styles.buttondd} onPress={() => submitFeedback(Demande.id)}>
+            <TouchableOpacity style={styles.buttondd} onPress={() => submitFeedback(DemandeFeedbackId)}>
               <Text style={styles.buttonText}>Enregistrer</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttondd} onPress={() => setModalVisible(false)}>
