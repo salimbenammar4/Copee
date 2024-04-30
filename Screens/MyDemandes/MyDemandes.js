@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Image, ImageBackground, Alert, StatusBar, Modal, TextInput  } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Image, ImageBackground, Alert, StatusBar, Modal, TextInput } from 'react-native';
 import { db } from '../../firebase';
 import { collection, query, getDocs, deleteDoc } from '@firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { doc, addDoc, setDoc, getDoc } from '@firebase/firestore';
+import { MaterialIcons } from '@expo/vector-icons';
+import { doc, setDoc } from '@firebase/firestore';
 import StarRating from 'react-native-star-rating';
 
-const MyDemandes = async () => {
+const MyDemandes = () => {
 
   const [loading, setLoading] = useState(true);
   const [Demande, setDemande] = useState([]);
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const navigation = useNavigation();
+  const [feedbackGiven, setFeedbackGiven] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [rating, setRating] = useState(0);
-  const [feedbackGiven, setFeedbackGiven] = useState([]);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const navigation = useNavigation();
 
   const fetchDemandes = async () => {
     try {
@@ -80,7 +80,7 @@ const MyDemandes = async () => {
 
   const submitFeedback = async () => {
     try {
-      await setDoc(collection(db, "users",user.uid,"Demandes","Feedback"), {
+      await setDoc(collection(db, "Feedback"), {
         userId: user.uid,
         feedback: feedback,
         rating: rating,
@@ -88,13 +88,14 @@ const MyDemandes = async () => {
       setFeedback('');
       setRating(0);
       setModalVisible(false);
-      setFeedbackGiven([...feedbackGiven, Demande.id]); 
+      setFeedbackGiven([...feedbackGiven, demandId]); 
       Alert.alert('Nous vous remercions pour votre feedback!');
     } catch (error) {
       console.error('Error submitting feedback:', error);
       Alert.alert('Error', 'Failed to submit feedback. Please try again.');
     }
   };
+
   const isFeedbackGiven = (demandId) => {
     return feedbackGiven.includes(demandId); 
   };
@@ -103,13 +104,11 @@ const MyDemandes = async () => {
     return (
       <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
         <>
-        <StatusBar barStyle="light-content" />
-      <View style={{flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',}}>
-        <ActivityIndicator size="large" color="white" />
-      </View>
-      </>
+          <StatusBar barStyle="light-content" />
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+            <ActivityIndicator size="large" color="white" />
+          </View>
+        </>
       </ImageBackground>
     );
   }
@@ -117,43 +116,43 @@ const MyDemandes = async () => {
   return (
     <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
       <>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Mes Demandes</Text>
-        </View>
-        <ScrollView>
-        {Demande.length > 0 ? (
-  Demande.map((Demande, index) => (
-    <View key={index} style={styles.userData}>
-      <TouchableOpacity style={styles.trashIconContainer} onPress={() => deleteDemande(Demande.id)}>
-        <MaterialIcons name="delete" size={24} color="white" />
-      </TouchableOpacity>
-      <Text style={styles.userDataText}>Type d'Installation: {Demande.TypeInstallation}</Text>
-      <Text style={styles.userDataText}>Type d'équipement: {Demande.typePanneaux}</Text>
-      <Text style={styles.userDataText}>Type de maison: {Demande.typeMaison}</Text>
-      <Text style={styles.userDataText}>Hauteur de maison: {Demande.hauteurMaison} Métres</Text>
-      <Text style={styles.userDataText}>Date de création: {formatDate(Demande.createdAt)}</Text>
-      <Text style={styles.userDataText}>Date de début de travail: {formatDate(Demande.dateDebutTravail)}</Text>
-      <Text style={[styles.userDataText, { color: getStatusColor(Demande.Status) }]}>Status: {Demande.Status}</Text>
-      {Demande.Status === 'Traitée' && (
-                    <TouchableOpacity style={[styles.buttond, isFeedbackGiven(Demande.id) && styles.buttonDisabled]} onPress={() => setModalVisible(true)} disabled={isFeedbackGiven(Demande.id)}>
+        <StatusBar barStyle="light-content" />
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Mes Demandes</Text>
+          </View>
+          <ScrollView>
+            {Demande.length > 0 ? (
+              Demande.map((demande, index) => (
+                <View key={index} style={styles.userData}>
+                  <TouchableOpacity style={styles.trashIconContainer} onPress={() => deleteDemande(demande.id)}>
+                    <MaterialIcons name="delete" size={24} color="white" />
+                  </TouchableOpacity>
+                  <Text style={styles.userDataText}>Type d'Installation: {demande.TypeInstallation}</Text>
+                  <Text style={styles.userDataText}>Type d'équipement: {demande.typePanneaux}</Text>
+                  <Text style={styles.userDataText}>Type de maison: {demande.typeMaison}</Text>
+                  <Text style={styles.userDataText}>Hauteur de maison: {demande.hauteurMaison} Métres</Text>
+                  <Text style={styles.userDataText}>Date de création: {formatDate(demande.createdAt)}</Text>
+                  <Text style={styles.userDataText}>Date de début de travail: {formatDate(demande.dateDebutTravail)}</Text>
+                  <Text style={[styles.userDataText, { color: getStatusColor(demande.Status) }]}>Status: {demande.Status}</Text>
+                  {demande.Status === 'Traitée' && (
+                    <TouchableOpacity style={[styles.buttond, isFeedbackGiven(demande.id) && styles.buttonDisabled]} onPress={() => setModalVisible(true)}>
                       <Text style={styles.buttonText}>Donnez votre avis!</Text>
                     </TouchableOpacity>
                   )}
-    </View>
-  ))
-) : (
-  <View style={styles.noTestsContainer}>
-    <Text style={styles.noTestsText}>Vous n'avez pas de demandes enregistrés.</Text>
-    <Text style={[styles.noTestsText, { marginTop: 50 }]}>Aprés avoir un test accepté, vous pouvez rédiger une demande d'installation d'équipement.</Text>
-  </View>
-)}
-        </ScrollView>
-        <TouchableOpacity style={styles.button} onPress={retour}>
-          <Text style={styles.buttonText}>Retour</Text>
-        </TouchableOpacity>
-      </View>
+                </View>
+              ))
+            ) : (
+              <View style={styles.noTestsContainer}>
+                <Text style={styles.noTestsText}>Vous n'avez pas de demandes enregistrées.</Text>
+                <Text style={[styles.noTestsText, { marginTop: 50 }]}>Après avoir un test accepté, vous pouvez rédiger une demande d'installation d'équipement.</Text>
+              </View>
+            )}
+          </ScrollView>
+          <TouchableOpacity style={styles.button} onPress={retour}>
+            <Text style={styles.buttonText}>Retour</Text>
+          </TouchableOpacity>
+        </View>
       </>
       <Modal
         animationType="slide"
@@ -180,7 +179,7 @@ const MyDemandes = async () => {
               placeholder="Entrez votre avis ici..."
               multiline
             />
-            <TouchableOpacity style={styles.buttondd} onPress={submitFeedback}>
+            <TouchableOpacity style={styles.buttondd} onPress={() => submitFeedback(Demande.id)}>
               <Text style={styles.buttonText}>Enregistrer</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttondd} onPress={() => setModalVisible(false)}>
@@ -231,7 +230,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   userDataText: {
-    color:"white",
+    color: "white",
     fontSize: 16,
     marginBottom: 5,
   },
@@ -239,7 +238,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:120
+    marginTop: 120
   },
   noTestsText: {
     fontSize: 21,
@@ -297,65 +296,64 @@ const styles = StyleSheet.create({
     backgroundColor: '#65539E',
     paddingVertical: 15,
     borderRadius: 10,
-    },
-    buttondd: {
-      backgroundColor: '#65539E',
-      paddingVertical: 15,
-      borderRadius: 10,
-      width:300,
-      marginTop:10
-      },
-    warning:{
+  },
+  buttondd: {
+    backgroundColor: '#65539E',
+    paddingVertical: 15,
+    borderRadius: 10,
+    width: 300,
+    marginTop: 10
+  },
+  warning: {
     flexDirection: 'column',
     alignItems: 'center',
     padding: 10,
-    },
-    radioButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginTop: 20,
-    },
-    radioCircle: {
-      height: 20,
-      width: 20,
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: '#65539E',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginRight: 10,
-    },
-    radioText: {
-      fontSize: 16,
-      color: '#ffffff',
-    },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-      },
-      modalContent: {
-        backgroundColor: 'white',
-        padding: 20,
-        borderRadius: 10,
-        width: '80%',
-      },
-      modalTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
-      },
-      input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 10,
-        minHeight: 100,
-      },
+  },
+  radioButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  radioCircle: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#65539E',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  radioText: {
+    fontSize: 16,
+    color: '#ffffff',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    minHeight: 100,
+  },
 });
-
 
 export default MyDemandes;
