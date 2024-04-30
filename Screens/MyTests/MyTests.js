@@ -29,7 +29,7 @@ const MyTests = () => {
       setTests(fetchedTests);
     } catch (error) {
       console.error('Error fetching tests:', error);
-      Alert.alert('Error', 'An error occurred while fetching tests. Please try again later.');
+      Alert.alert('Erreur', 'Veuillez vérifier votre connexion internet.');
     } finally {
       setLoading(false);
     }

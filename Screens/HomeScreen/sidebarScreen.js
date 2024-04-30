@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image,Linking} from 'react-native';
-import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons,FontAwesome6,MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign, Fontisto, Entypo, Ionicons,FontAwesome6,MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react';
 import { getAuth, signOut } from 'firebase/auth';
@@ -109,6 +109,16 @@ const handleLogout = async () => {
         <View style={styles.menuItemContent}>
           <Fontisto name="test-tube" size={24} color="black" style={styles.icon}/>
           <Text style={styles.menuText}>Test d'Eligibilité</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.menuItem}
+        onPress={() => {
+          navigation.navigate('MyDemandes');}}
+      >
+        <View style={styles.menuItemContent}>
+        <FontAwesome5 name="toolbox" size={24} color="black" style={styles.icon} />
+          <Text style={styles.menuText}>Mes Demandes</Text>
         </View>
       </TouchableOpacity>
       

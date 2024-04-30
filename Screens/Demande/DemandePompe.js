@@ -22,10 +22,13 @@ const DemandePompe = () => {
         if (user) {
             try {
                 const demandeData = {
+                    userId: user.uid,
+                    TypeInstallation:"Pompes à chaleur",
                     typePompe: selectedOption1,
                     typeMaison: selectedOption2,
                     hauteurMaison: Hauteur,
-                    dateDebutTravail: date
+                    dateDebutTravail: date,
+                    Status:"En cours de traitement..."
                 };
                 const userDemandesRef = collection(db, 'users', user.uid, 'Demandes');
                 await addDoc(userDemandesRef, {

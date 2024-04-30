@@ -22,10 +22,13 @@ const DemandePanneaux = () => {
         if (user) {
             try {
                 const demandeData = {
+                    userId: user.uid,
+                    TypeInstallation:"Panneaux Solaires",
                     typePanneaux: selectedOption1,
                     typeMaison: selectedOption2,
                     hauteurMaison: Hauteur,
-                    dateDebutTravail: date
+                    dateDebutTravail: date,
+                    Status:"En cours de traitement..."
                 };
                 const userDemandesRef = collection(db, 'users', user.uid, 'Demandes');
                 await addDoc(userDemandesRef, {
