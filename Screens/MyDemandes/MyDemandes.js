@@ -5,10 +5,10 @@ import { collection, query, getDocs, deleteDoc } from '@firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { doc, addDoc } from '@firebase/firestore';
+import { doc, addDoc, setDoc, getDoc } from '@firebase/firestore';
 import StarRating from 'react-native-star-rating';
 
-const MyDemandes = () => {
+const MyDemandes = async () => {
 
   const [loading, setLoading] = useState(true);
   const [Demande, setDemande] = useState([]);
@@ -19,7 +19,6 @@ const MyDemandes = () => {
   const [feedback, setFeedback] = useState('');
   const [rating, setRating] = useState(0);
   const [feedbackGiven, setFeedbackGiven] = useState([]);
-
 
   const fetchDemandes = async () => {
     try {
@@ -81,7 +80,7 @@ const MyDemandes = () => {
 
   const submitFeedback = async () => {
     try {
-      await addDoc(collection(db, "Feedbacks"), {
+      await setDoc(collection(db, "users",user.uid,"Demandes","Feedback"), {
         userId: user.uid,
         feedback: feedback,
         rating: rating,
@@ -89,7 +88,7 @@ const MyDemandes = () => {
       setFeedback('');
       setRating(0);
       setModalVisible(false);
-      setFeedbackGiven([...feedbackGiven, Demande.id]); // Add the demand ID to feedbackGiven
+      setFeedbackGiven([...feedbackGiven, Demande.id]); 
       Alert.alert('Nous vous remercions pour votre feedback!');
     } catch (error) {
       console.error('Error submitting feedback:', error);
@@ -97,7 +96,7 @@ const MyDemandes = () => {
     }
   };
   const isFeedbackGiven = (demandId) => {
-    return feedbackGiven.includes(demandId); // Check if feedback is given for this demand
+    return feedbackGiven.includes(demandId); 
   };
 
   if (loading) {
