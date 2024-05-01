@@ -24,7 +24,7 @@ const DemandeThermo = () => {
                 const demandeData = {
                     userId: user.uid,
                     TypeInstallation:"Ballons Thermodynamiques",
-                    typeBallonsThermos: selectedOption1,
+                    typeEquipement: selectedOption1,
                     typeMaison: selectedOption2,
                     hauteurMaison: Hauteur,
                     dateDebutTravail: date,

@@ -24,7 +24,7 @@ const DemandePanneaux = () => {
                 const demandeData = {
                     userId: user.uid,
                     TypeInstallation:"Panneaux Solaires",
-                    typePanneaux: selectedOption1,
+                    typeEquipement: selectedOption1,
                     typeMaison: selectedOption2,
                     hauteurMaison: Hauteur,
                     dateDebutTravail: date,

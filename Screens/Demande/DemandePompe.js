@@ -24,7 +24,7 @@ const DemandePompe = () => {
                 const demandeData = {
                     userId: user.uid,
                     TypeInstallation:"Pompes à chaleur",
-                    typePompe: selectedOption1,
+                    typeEquipement: selectedOption1,
                     typeMaison: selectedOption2,
                     hauteurMaison: Hauteur,
                     dateDebutTravail: date,

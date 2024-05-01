@@ -16,6 +16,12 @@ const PersonnelDashboard = () => {
     const alltests=()=>{
         navigation.navigate('AllTests');
     }
+    const allDemandes=()=>{
+        navigation.navigate('AllDemandes');
+    }
+    const allAvis=()=>{
+        navigation.navigate('feedbacks');
+    }
 
     const handleLogout = async () => {
         try {
@@ -44,12 +50,16 @@ const PersonnelDashboard = () => {
                     <TouchableOpacity style={localStyles.button} onPress={alltests}>
                         <Text style={localStyles.buttonText}>Gérer les tests d'éligibilité</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={localStyles.button} onPress={handleLogout}>
+                    <TouchableOpacity style={localStyles.button} onPress={allDemandes}>
                         <Text style={localStyles.buttonText}>Gérer les demandes</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={localStyles.button} onPress={allAvis}>
+                        <Text style={localStyles.buttonText}>Liste d'avis</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[localStyles.logoutbutton,{marginTop:270}]} onPress={handleLogout}>
                         <Text style={localStyles.buttonText}>Se Déconnecter</Text>
                     </TouchableOpacity>
+                    
                 </View>
             </>
         </ImageBackground>

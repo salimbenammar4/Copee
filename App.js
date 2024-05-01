@@ -35,6 +35,8 @@ import DemandePompe from './Screens/Demande/DemandePompe';
 import DemandeBallon from './Screens/Demande/DemandeBallon';
 import DemandeThermo from './Screens/Demande/DemandeBallonThermodynamique';
 import MyDemandes from './Screens/MyDemandes/MyDemandes';
+import AllDemandes from './Screens/PersonnelDashboard/AllDemandes';
+import Avis from './Screens/PersonnelDashboard/Avis';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -106,6 +108,8 @@ const App = () => {
   <Stack.Screen name="demandeballon" component={DemandeBallon} options={{ headerShown: false }}/>
   <Stack.Screen name="thermo" component={DemandeThermo} options={{ headerShown: false }}/>     
   <Stack.Screen name="MyDemandes" component={MyDemandes} options={{ headerShown: false }}/>   
+  <Stack.Screen name="AllDemandes" component={AllDemandes} options={{ headerShown: false }}/>   
+  <Stack.Screen name="feedbacks" component={Avis} options={{ headerShown: false }}/> 
 </Stack.Navigator>
     </NavigationContainer>
   );
