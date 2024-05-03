@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ImageBackground,TouchableOpacity } from 'react-native';
 import { collection, query, getDocs } from '@firebase/firestore';
 import { db } from '../../firebase';
-
+import StarRating from './StarRating';
+import { useNavigation } from '@react-navigation/native';
 const Avis = () => {
   const [userData, setUserData] = useState([]);
-
+  const navigation=useNavigation();
   useEffect(() => {
     fetchAvis();
   }, []);
+
+  const retour = () => {
+    navigation.navigate('PersonnelDashboard');
+  };
 
   const fetchAvis = async () => {
     try {
@@ -16,41 +21,45 @@ const Avis = () => {
       const usersQuery = query(usersCollection);
       const usersSnapshot = await getDocs(usersQuery);
 
-      const fetchedUserData = [];
+      const allUserData = [];
 
       for (const userDoc of usersSnapshot.docs) {
         const userData = userDoc.data();
         const userId = userDoc.id;
         const demandesCollection = collection(db, 'users', userId, 'Demandes');
-        const demandesQuery = query(demandesCollection);
-        const demandesSnapshot = await getDocs(demandesQuery);
+        const demandesSnapshot = await getDocs(demandesCollection);
 
-        const feedbacks = [];
-
-        demandesSnapshot.forEach((demandeDoc) => {
+        for (const demandeDoc of demandesSnapshot.docs) {
+          const demandeId = demandeDoc.id;
           const demandeData = demandeDoc.data();
-          if (demandeData.feedbacks) { // Corrected property name here
-            const demandeFeedbacks = demandeData.feedbacks; // Corrected property name here
-            demandeFeedbacks.forEach((feedback) => {
-              feedbacks.push({ demandeId: demandeDoc.id, userId, ...feedback });
-            });
-          }
-        });
+          const feedbacksCollection = collection(db, 'users', userId, 'Demandes', demandeId, 'Feedbacks');
+          const feedbacksSnapshot = await getDocs(feedbacksCollection);
 
-        fetchedUserData.push({ userId, ...userData, feedbacks });
+          const userFeedbacks = feedbacksSnapshot.docs.map(feedbackDoc => {
+            const feedbackData = feedbackDoc.data();
+            return { demandeId, ...feedbackData };
+          });
+
+          allUserData.push({ userId, ...userData, ...demandeData, feedbacks: userFeedbacks });
+        }
       }
 
-      setUserData(fetchedUserData);
+      setUserData(allUserData);
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching feedbacks:', error);
     }
+  };
+
+  const formatDate = (timestamp) => {
+    const date = timestamp.toDate();
+    return date.toLocaleString();
   };
 
   return (
     <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>Liste des Demandes</Text>
+          <Text style={styles.title}>Liste d'Avis</Text>
         </View>
         <ScrollView>
           {userData.map((userData, index) => (
@@ -60,16 +69,20 @@ const Avis = () => {
               <Text style={styles.userDataText}>Email: {userData.Email}</Text>
               <Text style={styles.userDataText}>Adresse: {userData.Adresse}</Text>
               <Text style={styles.userDataText}>Téléphone: {userData.PhoneNumber}</Text>
+              <Text style={styles.userDataText}>Type d'installation: {userData.TypeInstallation}</Text>
+              <Text style={styles.userDataText}>Type d'équipement: {userData.typeEquipement}</Text>
               {userData.feedbacks.map((feedback, index) => (
                 <View key={index} style={styles.feedbackContainer}>
-                  <Text style={styles.userDataText}>Demande ID: {feedback.demandeId}</Text>
-                  <Text style={styles.userDataText}>Rating: {feedback.rating}</Text>
-                  <Text style={styles.userDataText}>Feedback: {feedback.feedback}</Text>
-                </View>
+                <Text style={styles.userDataText}>Feedback: {feedback.feedback}</Text>
+                <StarRating rating={feedback.rating} />
+              </View>
               ))}
             </View>
           ))}
         </ScrollView>
+        <TouchableOpacity style={styles.buttonr} onPress={retour}>
+        <Text style={styles.buttonTextr}>Retour</Text>
+      </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -110,10 +123,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   feedbackContainer: {
-    backgroundColor: '#f0f0f0',
+    
     borderRadius: 10,
-    padding: 10,
-    marginTop: 10,
+    
+    marginTop: 2,
+  },
+  buttonr: {
+    backgroundColor: '#65539E',
+    paddingVertical: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  buttonTextr: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

@@ -40,7 +40,8 @@ const DemandePanneaux = () => {
                     "Vous avez ajouté une demande d'installation. Le Personnel va traiter la demande aussi vite que possible.",)
             } catch (error) {
                 console.error('Error adding document: ', error);
-            }}}
+            }}
+        navigation.navigate("MyDemandes")}
 
     
     return (

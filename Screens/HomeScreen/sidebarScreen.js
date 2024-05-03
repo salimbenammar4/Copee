@@ -196,7 +196,7 @@ const styles = {
   socialButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 80,
+    marginTop:45,
     paddingHorizontal: 70,
   },
   socialButton: {

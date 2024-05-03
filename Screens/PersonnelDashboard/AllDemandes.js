@@ -3,13 +3,16 @@ import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity
 import { db } from '../../firebase';
 import { collection, query, getDocs } from '@firebase/firestore';
 import { updateDoc, doc,where } from '@firebase/firestore';
-
+import { useNavigation } from '@react-navigation/native';
 const AllDemandes = () => {
   const [Demandes, setDemandes] = useState([]);
-
+  const navigation=useNavigation();
   useEffect(() => {
     fetchDemandes();
   }, []);
+  const retour = () => {
+    navigation.navigate('PersonnelDashboard');
+  };
 
   const fetchDemandes = async () => {
     try {
@@ -114,6 +117,9 @@ const AllDemandes = () => {
           </View>
         ))}
       </ScrollView>
+      <TouchableOpacity style={styles.buttonr} onPress={retour}>
+        <Text style={styles.buttonTextr}>Retour</Text>
+      </TouchableOpacity>
       </View>
 </ImageBackground>
   );
@@ -236,6 +242,18 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
+      },
+      buttonr: {
+        backgroundColor: '#65539E',
+        paddingVertical: 15,
+        borderRadius: 10,
+        marginBottom: 20,
+      },
+      buttonTextr: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
       },
   });
 export default AllDemandes;
