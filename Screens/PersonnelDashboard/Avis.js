@@ -56,7 +56,7 @@ const Avis = () => {
   };
 
   return (
-    <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
+    <ImageBackground source={require('../../assets/purple-neon-lined-pattern-dark-social-story-background-vector_53876-170438.jpg')} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Liste d'Avis</Text>

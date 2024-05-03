@@ -103,7 +103,7 @@ const MyDemandes = () => {
 
   if (loading) {
     return (
-      <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
+      <ImageBackground source={require('../../assets/33114809_rm251-mind-15-e.jpg')} style={styles.background}>
         <>
           <StatusBar barStyle="light-content" />
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
@@ -115,7 +115,7 @@ const MyDemandes = () => {
   }
 
   return (
-    <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
+    <ImageBackground source={require('../../assets/33114809_rm251-mind-15-e.jpg')} style={styles.background}>
       <>
         <StatusBar barStyle="light-content" />
         <View style={styles.container}>

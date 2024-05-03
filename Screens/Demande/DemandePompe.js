@@ -44,7 +44,7 @@ const DemandePompe = () => {
 
     
     return (
-        <ImageBackground source={require('../../assets/domo.png')} style={style.background}>
+        <ImageBackground source={require('../../assets/rm222-mind-24.jpg')} style={style.background}>
             <>
 
                 <View style={style.header}>

@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 16,
     margin: 5,
+    marginTop:50
   },
   heroimg: {
     width: '100%',

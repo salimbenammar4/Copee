@@ -90,7 +90,7 @@ const AllDemandes = () => {
 
 
   return (
-    <ImageBackground source={require('../../assets/back3.jpg')} style={styles.background}>
+    <ImageBackground source={require('../../assets/pink-neon-synthwave-patterned-social-story-template-vector_53876-176441.jpg')} style={styles.background}>
         <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Liste des Demandes</Text>

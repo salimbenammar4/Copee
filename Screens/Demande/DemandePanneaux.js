@@ -45,7 +45,7 @@ const DemandePanneaux = () => {
 
     
     return (
-        <ImageBackground source={require('../../assets/domo.png')} style={style.background}>
+        <ImageBackground source={require('../../assets/rm222-mind-24.jpg')} style={style.background}>
             <>
 
                 <View style={style.header}>
@@ -53,7 +53,7 @@ const DemandePanneaux = () => {
                         style={style.menuButton}
                         onPress={() => navigation.navigate("MyTests")}
                     >
-                        <AntDesign name="back" size={24} color="white"/>
+                        <AntDesign name="back" size={24} color="black"/>
                     </TouchableOpacity>
                     <View style={style.titleContainer}>
                         <Text style={style.title}>Demande pour panneaux solaires</Text>
@@ -91,7 +91,7 @@ const DemandePanneaux = () => {
                                 <Picker.Item label="A niveau" value="A niveau" />
                             </Picker>
                         </View>
-                        <Text  style={[style.subtitle, {textAlign: 'left'}]}>Hauteur de la maison</Text>
+                        <Text  style={[style.subtitle, {textAlign: 'left'}]}>Hauteur de la maison: </Text>
                         <TextInput
                             placeholder="Hauteur de la maison"
                             placeholderColor="#c4c3cb"
@@ -136,7 +136,7 @@ const style = StyleSheet.create({
         marginTop: 10,
         textAlign: 'center',
         marginBottom: 10,
-        color: 'white',
+        color: 'black',
     },
     profileButton: {
         marginRight: 20,
@@ -144,14 +144,14 @@ const style = StyleSheet.create({
     heroTitle: {
         textAlign: 'center',
         fontSize: 34,
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         fontStyle: 'italic',
     },
     subtitle: {
         fontSize: 15,
         fontWeight: '500',
-        color: 'white',
+        color: 'black',
         marginTop: 10,
         textAlign: 'center',
     },
