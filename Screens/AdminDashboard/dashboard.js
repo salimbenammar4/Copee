@@ -70,7 +70,7 @@ const Dashboard = ({ navigation }) => {
     <ImageBackground source={require('../../assets/admin12.jpg')} style={style.background}>
       <>
     <ScrollView style={style.container}>
-      <StatusBar backgroundColor="black" barStyle="dark-content" />
+      <StatusBar backgroundColor="black" barStyle="light-content" />
       <View style={styles.hero}>
         <Image
           source={{ uri: 'https://www.copee.eu/wp-content/uploads/2022/01/logo-white-02-3.png' }}
