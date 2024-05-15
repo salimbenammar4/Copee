@@ -56,7 +56,7 @@ const PersonnelDashboard = () => {
                     <TouchableOpacity style={localStyles.button} onPress={allAvis}>
                         <Text style={localStyles.buttonText}>Liste d'avis</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[localStyles.logoutbutton,{marginTop:270}]} onPress={handleLogout}>
+                    <TouchableOpacity style={[localStyles.logoutbutton,{marginTop:100}]} onPress={handleLogout}>
                         <Text style={localStyles.buttonText}>Se Déconnecter</Text>
                     </TouchableOpacity>
                     
