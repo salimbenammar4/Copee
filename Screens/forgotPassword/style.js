@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 5,
     marginBottom: 5,
-    marginLeft: 5,
+    marginLeft: 20,
     width: 300,
   },
   loginButton: {
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     height: 50,
     marginBottom: 10,
-    marginTop:10
+    marginTop:10,
+    marginLeft:15
   },
   signupText: {
     color: '#fff',
