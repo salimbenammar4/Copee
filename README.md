@@ -1,78 +1,76 @@
 # CopeeApp
 
-CopeeApp est une application mobile développée avec React Native et Firebase. Elle permet aux utilisateurs de bénéficier des services et informations liés aux économies d'énergie offerts par la société COPEE.
+CopeeApp is a mobile application developed with **React Native** and **Firebase**. It allows users to access services and information related to energy-saving solutions offered by **COPEE**.
 
-## Fonctionnalités
+## Features
 
 ### Client
 
-* Créer un compte
-* Se connecter
-* Réinitialiser le mot de passe
-* Consulter les actualités liées aux économies d'énergie
-* Consulter les installations fournies par la société COPEE
-* Consulter les services fournis par la société
-* Tester l'éligibilité à déployer un équipement d'économie d'énergie
-* Une fois le test d'éligibilité accepté, générer une demande d'installation d'équipement
+- Create an account  
+- Log in  
+- Reset password  
+- View news about energy-saving solutions  
+- Browse installations provided by COPEE  
+- Check available services  
+- Test eligibility for deploying energy-saving equipment  
+- Once eligible, generate an equipment installation request  
+- Real-time chat with staff  
+- Submit feedback  
 
-* Chat en temps réel avec le personnel
-* Soumettre un retour d'expérience
+### Staff
 
-### Personnel
+- Log in  
+- Manage installation requests  
+- View client feedback  
+- Chat with clients  
 
-* Se connecter
-* Gérer les demandes d'installation
-* Consulter les retours d'expérience
-* Discuter avec les clients
+### Administrator
 
-### Administrateur
+- Log in  
+- Manage users  
+- Chat with clients  
 
-* Se connecter
-* Gérer les utilisateurs
-* Discuter avec les clients
+---
 
+## Instructions to Deploy the Project on Another Computer
 
-## Instructions pour déployer le projet sur un autre ordinateur
+### Prerequisites
 
-### Prérequis
+- Node.js (version 10 or later)  
+- npm  
+- Git  
+- ExpoGo (on your smartphone)  
+- A Firebase account with a created project  
 
-* Node.js (version 10 ou ultérieure)
-* npm
-* Git
-* ExpoGo (Dans votre smartphone)
-* Un compte Firebase avec un projet créé
+### Steps
 
-### Etapes
+1. Clone the GitHub repository:  
+    ```bash
+    git clone https://github.com/salimbenammar4/Copee.git
+    ```
 
-Clonez le dépôt GitHub
-```
-git clone https://github.com/salimbenammar4/Copee.git
-```
-Accédez au répertoire du projet 
-```
-cd CopeeApp
-```
-Installez les dépendances avec npm 
-```
-npm install
-```
-Configurez Firebase
-Configurez le fichier firebase.js avec les informations de configuration.
-Exemple:
-```
-export default {
-  apiKey: "VOTRE_API_KEY",
-  authDomain: "VOTRE_AUTH_DOMAIN",
-  projectId: "VOTRE_PROJECT_ID",
-  storageBucket: "VOTRE_STORAGE_BUCKET",
-  messagingSenderId: "VOTRE_MESSAGING_SENDER_ID",
-  appId: "VOTRE_APP_ID",
-  measurementId: "VOTRE_MEASUREMENT_ID"
-};
-```
+2. Access the project directory:  
+    ```bash
+    cd CopeeApp
+    ```
 
-Lancez l'application
-```
-npx expo start
-```
+3. Install dependencies with npm:  
+    ```bash
+    npm install
+    ```
 
+4. Configure Firebase:  
+    Set up the `firebase.js` file with your Firebase configuration details.  
+
+    Example:  
+    ```javascript
+    export default {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID",
+      measurementId: "YOUR_MEASUREMENT_ID"
+    };
+    ```
